@@ -13,46 +13,44 @@
 
 /* Define polling rates in Hz.  */
 #define GAME_TICK_RATE 10
-#define BEAM_TIME 
 #define INPUT_RATE 10
 #define DISPLAY_RATE 200
 
 static int8_t player_pos;
 
+// this task processes player input
 void process_input(__unused__ void *data){
-	//pio_output_high(LEDMAT_ROW7_PIO);
     navswitch_update();
 
-    // Checks position change
+    // Checks position change, then changes player by the direction moved
     if (navswitch_push_event_p (1))
     {
         update_player(1);
-    }
-
-    // Checks position change
-    if (navswitch_push_event_p (3))
+    } 
+	else if (navswitch_push_event_p(3))
     {
         update_player(-1);
-    }
-    // Player shot
-    if (navswitch_push_event_p (4))
+    } 
+    else if (navswitch_push_event_p (4))
     {
+		// player shooting
         player_pos = get_player_pos();
         start_shot(player_pos);
     }
-    // Checks inc shot
+    // Checks for incoming shot from opponent
     if (ir_uart_read_ready_p())
     {
         int8_t incoming_shot = ir_uart_getc();
         create_shell(incoming_shot);
     }
 }
-
+// updates the game information
 void update_game(__unused__ void *data){
 	update_shoot_beam();
     move_shells();
 }
 
+// updates display to match game information
 void update_display(__unused__ void *data){
 	draw_shoot_beam();
 	draw_shells();
@@ -60,19 +58,19 @@ void update_display(__unused__ void *data){
     tinygl_update();
 }
 
+// inits all the systems needed for the game
 static void game_init(void){
     system_init ();
     navswitch_init();
     display_init();
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
-    create_shell(3);
+    create_shell(3); //TEST SHELL
 }
 
 
 int main (void)
 {
-    // Initilize
 	game_init();
     task_t tasks[] =
     {

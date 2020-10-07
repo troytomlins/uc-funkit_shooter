@@ -9,19 +9,20 @@
 #include "system.h"
 #include "led.h"
 #define MAX_SHELLS 5
-
+#define TICK_THRESHOLD 5
+// define custom object type "shell"
 typedef struct {
     tinygl_point_t pos;
     int move_tick;
     bool active;
 } shell_t;
 
+// define custom list for shells
 typedef struct {
     shell_t array[MAX_SHELLS];
 } shells_list_t;
 
 static shells_list_t shells;
-static int tick_count = 0;
 
 //creates a shell at x coord line
 void create_shell(int8_t x)
@@ -35,13 +36,14 @@ void create_shell(int8_t x)
             shell->pos.x = x;
             shell->pos.y = -1;
             shell->active = true;
+            shell->move_tick = 0;
             created = true;
         }
     }
     //if we reach here, we've hit max bullets
 }
 
-//deactives a shell
+//deactivates a shell
 static void deactivate_shell(shell_t* shell)
 {
     shell->active = false;
@@ -69,7 +71,9 @@ void move_shells(void)
 	for(i=0; i<MAX_SHELLS; i++) {
 		shell_t* shell = &shells.array[i];
 		tinygl_draw_point(shell->pos, 0);
+		// if the shell is active and TICK_THRESHOLD has been reached, move the shell
 		if(shell->active && (shell->move_tick++ == 5)) {
+			// note the if statement increments move-tick, regardless of true or false
 			shell->pos.y ++;
 			shell->move_tick = 0;
 			//if shell is off ledmat, deactivate
