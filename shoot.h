@@ -9,11 +9,11 @@
 #include "system.h"
 #include "tinygl.h"
 
+void draw_shoot_beam(void);
 
 void start_shot(int8_t shot);
 
-void shoot(int8_t shot, int i);
-
 void update_shoot_beam(void);
+
 
 #endif

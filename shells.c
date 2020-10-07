@@ -12,6 +12,7 @@
 
 typedef struct {
     tinygl_point_t pos;
+    int move_tick;
     bool active;
 } shell_t;
 
@@ -68,8 +69,9 @@ void move_shells(void)
 	for(i=0; i<MAX_SHELLS; i++) {
 		shell_t* shell = &shells.array[i];
 		tinygl_draw_point(shell->pos, 0);
-		if(shell->active) {
+		if(shell->active && (shell->move_tick++ == 5)) {
 			shell->pos.y ++;
+			shell->move_tick = 0;
 			//if shell is off ledmat, deactivate
 			if(shell->pos.y > 6) {
 				deactivate_shell(shell);

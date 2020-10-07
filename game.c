@@ -12,7 +12,7 @@
 #include "led.h"
 
 /* Define polling rates in Hz.  */
-#define GAME_TICK_RATE 2
+#define GAME_TICK_RATE 10
 #define BEAM_TIME 
 #define INPUT_RATE 10
 #define DISPLAY_RATE 200
@@ -54,6 +54,7 @@ void update_game(__unused__ void *data){
 }
 
 void update_display(__unused__ void *data){
+	draw_shoot_beam();
 	draw_shells();
 	draw_player();
     tinygl_update();
