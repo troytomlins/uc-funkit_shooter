@@ -13,6 +13,7 @@
 
 /* Define polling rates in Hz.  */
 #define GAME_TICK_RATE 2
+#defin BEAM_TIME 
 #define INPUT_RATE 120
 #define DISPLAY_RATE 250
 
@@ -48,6 +49,7 @@ void process_input(__unused__ void *data){
 }
 
 void update_game(__unused__ void *data){
+	update_shoot_beam();
     move_shells();
 }
 

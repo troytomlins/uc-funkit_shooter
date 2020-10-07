@@ -5,6 +5,8 @@
 */
 
 #include "tinygl.h"
+#include "ir_uart.h"
+
 
 static int shot_cd = 0; // Shot cooldown timer
 static int shot_dis = 0; // Shot display timer
@@ -24,8 +26,8 @@ void start_shot(int8_t shot)
     if (shot_cd == 0)
     {
         shot_col = shot;
-        shot_dis = 100;
-        shot_cd = 1000;
+        shot_dis = 1;
+        shot_cd = 1;
 
         shoot(shot_col, 1); // Display's shot
 
@@ -33,7 +35,7 @@ void start_shot(int8_t shot)
     }
 }
 
-void shot_update(void) {
+void update_shoot_beam(void) {
 
     // Checks if shot needs removed from screen
     if (shot_dis == 1)

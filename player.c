@@ -22,8 +22,8 @@ void draw_player(void){
     tinygl_draw_point(player.pos, 1);
 }
 
-void get_player_pos(void){
-	return player.pos;
+int8_t get_player_pos(void){
+	return player.pos.x;
 }
 
 /** Updates Player's location */

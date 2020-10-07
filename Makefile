@@ -71,7 +71,7 @@ led.o: ../../drivers/led.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ..
 player.o: player.c player.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-shoot.o: shoot.c shoot.h
+shoot.o: shoot.c shoot.h ../../drivers/avr/ir_uart.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
