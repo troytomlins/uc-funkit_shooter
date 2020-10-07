@@ -12,7 +12,7 @@
 
 
 void create_shell(int8_t x);
-
+void draw_shells(void);
 void move_shells(void);
 
 

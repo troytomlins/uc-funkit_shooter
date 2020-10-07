@@ -47,7 +47,7 @@ static void deactivate_shell(shell_t* shell)
 }
 
 // draws all shells
-static void draw_shells(void)
+void draw_shells(void)
 {
     int i;
     //cycle through shells, drawing each one
@@ -63,21 +63,19 @@ static void draw_shells(void)
 //moves all active shells and deactivates shells if they go off the ledmat
 void move_shells(void)
 {
-        //cycle through shells, moving each one
-        int i;
-        for(i=0; i<MAX_SHELLS; i++) {
-            shell_t* shell = &shells.array[i];
-            tinygl_draw_point(shell->pos, 0);
-            if(shell->active) {
-                shell->pos.y ++;
-                //if shell is off ledmat, deactivate
-                if(shell->pos.y > 6) {
-                    deactivate_shell(shell);
-                }
-            }
-        }
-    
-    draw_shells();
+	//cycle through shells, moving each one
+	int i;
+	for(i=0; i<MAX_SHELLS; i++) {
+		shell_t* shell = &shells.array[i];
+		tinygl_draw_point(shell->pos, 0);
+		if(shell->active) {
+			shell->pos.y ++;
+			//if shell is off ledmat, deactivate
+			if(shell->pos.y > 6) {
+				deactivate_shell(shell);
+			}
+		}
+	}
 }
 
 

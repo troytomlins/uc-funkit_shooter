@@ -13,14 +13,14 @@
 
 /* Define polling rates in Hz.  */
 #define GAME_TICK_RATE 2
-#defin BEAM_TIME 
-#define INPUT_RATE 120
-#define DISPLAY_RATE 250
+#define BEAM_TIME 
+#define INPUT_RATE 10
+#define DISPLAY_RATE 200
 
 static int8_t player_pos;
 
 void process_input(__unused__ void *data){
-	pio_output_high(LEDMAT_ROW7_PIO);
+	//pio_output_high(LEDMAT_ROW7_PIO);
     navswitch_update();
 
     // Checks position change
@@ -54,6 +54,7 @@ void update_game(__unused__ void *data){
 }
 
 void update_display(__unused__ void *data){
+	draw_shells();
 	draw_player();
     tinygl_update();
 }
@@ -62,8 +63,7 @@ static void game_init(void){
     system_init ();
     navswitch_init();
     display_init();
-    pacer_init (500);
-    tinygl_init(500);
+    tinygl_init(DISPLAY_RATE);
     ir_uart_init();
     create_shell(3);
 }
