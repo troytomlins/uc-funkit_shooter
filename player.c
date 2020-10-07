@@ -18,24 +18,26 @@ static player_t player = {{2,6}};
 
 
 /** Display's Player's location */
-static void draw_player(void){
+void draw_player(void){
     tinygl_draw_point(player.pos, 1);
 }
 
+void get_player_pos(void){
+	return player.pos;
+}
+
 /** Updates Player's location */
-static void update_player(int inc){
+void update_player(int inc){
 
     if ((inc == 1) && (player.pos.x != 4))
     {
         tinygl_draw_point(player.pos, 0);
         player.pos.x += inc;
-        tinygl_draw_point(player.pos, 1);
     }
     else if ((inc == -1) && (player.pos.x != 0))
     {
         tinygl_draw_point(player.pos, 0);
         player.pos.x += inc;
-        tinygl_draw_point(player.pos, 1);
     }
 }
 

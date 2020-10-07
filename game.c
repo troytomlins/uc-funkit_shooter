@@ -13,19 +13,13 @@
 
 /* Define polling rates in Hz.  */
 #define GAME_TICK_RATE 2
+#define INPUT_RATE 120
 #define DISPLAY_RATE 250
 
 static int8_t player_pos;
-static int8_t inc_shot;
 
-static void game_init(void){
-    create_shell(1);
-}
-
-void update_game(__unused__ void *data){
-    move_shells();
-
-    pio_output_high(LEDMAT_ROW7_PIO);
+void process_input(__unused__ void *data){
+	pio_output_high(LEDMAT_ROW7_PIO);
     navswitch_update();
 
     // Checks position change
@@ -48,30 +42,39 @@ void update_game(__unused__ void *data){
     // Checks inc shot
     if (ir_uart_read_ready_p())
     {
-        inc_shot = ir_uart_getc();
-        tinygl_point_t inc_pos = {inc_shot, 0};
-        tinygl_draw_point(inc_pos, 1);
+        int8_t incoming_shot = ir_uart_getc();
+        create_shell(incoming_shot);
     }
 }
 
-void update_display(__unused__ void *data){
-    tinygl_update();
-    draw_player();
+void update_game(__unused__ void *data){
+    move_shells();
 }
 
-int main (void)
-{
-    // Initilize
+void update_display(__unused__ void *data){
+	draw_player();
+    tinygl_update();
+}
+
+static void game_init(void){
     system_init ();
     navswitch_init();
-    game_init();
     display_init();
     pacer_init (500);
     tinygl_init(500);
     ir_uart_init();
+    create_shell(3);
+}
 
+
+int main (void)
+{
+    // Initilize
+	game_init();
     task_t tasks[] =
     {
+		{.func = process_input, .period = TASK_RATE / INPUT_RATE,
+         .data = 0},
         {.func = update_game, .period = TASK_RATE / GAME_TICK_RATE,
          .data = 0},
         {.func = update_display, .period = TASK_RATE / DISPLAY_RATE,
