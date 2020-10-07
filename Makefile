@@ -17,7 +17,7 @@ all: game.out
 
 # Compile: create object files from C source files.
 
-game.o: game.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../drivers/avr/pio.h ../../drivers/ledmat.h ../../utils/pacer.h ../../drivers/avr/timer.h ../../utils/tinygl.h ../../drivers/display.h ../../utils/font.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h ../../drivers/avr/prescale.h ../../utils/task.h ../../utils/tinygl.h shells.h ../../drivers/led.h
+game.o: game.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../drivers/avr/pio.h ../../drivers/ledmat.h ../../utils/pacer.h ../../drivers/avr/timer.h ../../utils/tinygl.h ../../drivers/display.h ../../utils/font.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h ../../drivers/avr/prescale.h ../../utils/task.h ../../utils/tinygl.h shells.h ../../drivers/led.h player.o
 	$(CC) -c $(CFLAGS) $< -o $@
 
 shells.o: shells.c ../../utils/tinygl.h ../../drivers/avr/system.h shells.h ../../drivers/led.h
@@ -68,8 +68,14 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h
 led.o: ../../drivers/led.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/led.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+player.o: player.c player.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+shoot.o: shoot.c shoot.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 # Link: create ELF output file from object files.
-game.out: game.o system.o navswitch.o pio.o ledmat.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o
+game.out: game.o system.o navswitch.o pio.o ledmat.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
