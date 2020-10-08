@@ -9,12 +9,14 @@
 #include "ir_uart.h"
 #include "shells.h"
 
+#define SHOT_COOLDOWN 5
+#define VISUAL_COOLDOWN 1
 
-static int shot_cd = 0; // Shot cooldown timer
 static int shot_dis = 0; // Shot display timer
+static int shot_cd = 0;
 static bool shot_on = false;
+static bool shot_ready = true;
 static int8_t shot_col; // Shot column
-
 
 // TEST CODE, MAKES PLAYER TO SHOOT AT THEMSELVES
 // REMOVE LATER
@@ -40,11 +42,12 @@ void draw_shoot_beam(void)
 // instantiates a shot
 void start_shot(int8_t shot)
 {
-    if (!shot_on) {
+    if (shot_loaded) {
         shot_col = shot;
         shot_on = true;
-        shot_dis = 1;
-        shot_cd = 1;
+        shot_ready = false;
+        shot_dis = VISUAL_COOLDOWN;
+        shot_cd = SHOT_COOLDOWN;
         ir_uart_putc(shot_col); // Sends to other player
         test_shot(shot); // TEST SHOT, REMOVE LATER
     }
@@ -57,6 +60,11 @@ void update_shoot_beam(void)
     if (shot_dis == 0) {
         shot_on = false;
     }
+    
+    // checks if gun has been reloaded
+    if(shot_cd == 0){
+		shot_ready = true;
+	}
 
     // Checks if shot is still being displayed
     if (shot_dis > 0) {

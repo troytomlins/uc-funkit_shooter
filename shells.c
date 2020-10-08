@@ -16,27 +16,24 @@ typedef struct {
     bool active;
 } shell_t;
 
-// define custom list for shells
-typedef struct {
-    shell_t array[MAX_SHELLS];
-} shells_list_t;
-
-static shells_list_t shells;
+static shell_t shells[MAX_SHELLS];
 
 //creates a shell at x coord line
 void create_shell(int8_t x)
 {
-    int i = 0;
+    uint8_t i = 0;
     bool created = false;
     //cycles through shells_list until a deactivated shell is found
     while(i < MAX_SHELLS && !created) {
-        shell_t* shell = &shells.array[i];
-        if(!shell->active == true) {
+        shell_t* shell = &(shells[i]);
+        if(!shell->active) {
+            created = true;
             shell->pos.x = x;
             shell->pos.y = -1;
             shell->active = true;
             shell->move_tick = 0;
-            created = true;
+        } else {
+            i++;
         }
     }
     //if we reach here, we've hit max bullets
@@ -51,10 +48,10 @@ static void deactivate_shell(shell_t* shell)
 // draws all shells
 void draw_shells(void)
 {
-    int i;
+    uint8_t i;
     //cycle through shells, drawing each one
     for(i=0; i<MAX_SHELLS; i++) {
-        shell_t* shell = &shells.array[i];
+        shell_t* shell = &(shells[i]);
         //only draw if shell is active
         if(shell->active) {
             tinygl_draw_point(shell->pos, 1);
@@ -66,9 +63,9 @@ void draw_shells(void)
 void move_shells(void)
 {
     //cycle through shells, moving each one
-    int i;
+    uint8_t i;
     for(i=0; i<MAX_SHELLS; i++) {
-        shell_t* shell = &shells.array[i];
+        shell_t* shell = &(shells[i]);
         tinygl_draw_point(shell->pos, 0);
         // if the shell is active and TICK_THRESHOLD has been reached, move the shell
         if(shell->active && (shell->move_tick++ == 5)) {
