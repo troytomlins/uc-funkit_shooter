@@ -7,21 +7,16 @@
 
 
 #include "system.h"
-#include "pio.h"
-#include "pacer.h"
 #include "tinygl.h"
-#include "navswitch.h"
 #include "ir_uart.h"
 #include "shoot.h"
 #include "player.h"
 #include "task.h"
-#include "tinygl.h"
+#include "navswitch.h"
 #include "shells.h"
-#include "led.h"
+#include "led.h" //TEST COMPONENT
 #include "readyup.h"
 #include "game.h"
-
-static bool start_game = false;
 
 // cleans an ir input to make sure it is valid (prevents invalid ir inputs)
 // a safety precaution against crashes.
@@ -78,7 +73,7 @@ void update_display(__unused__ void *data)
 int main (void)
 {
 	game_init();
-    ready_up();// only proceeds after both players ready up
+    ready_up();// COMMENT THIS OUT TO SKIP READYUP STAGE
 	
     task_t tasks[] = {
         {

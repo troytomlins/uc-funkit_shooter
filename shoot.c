@@ -7,7 +7,6 @@
 
 #include "tinygl.h"
 #include "ir_uart.h"
-#include "shells.h"
 #include "shoot.h"
 
 static int shot_dis = 0; // Shot display timer

@@ -7,10 +7,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "system.h"
 #include "tinygl.h"
 
-#define PLAYER_START_POS {2,6}
+#define PLAYER_START_POS {2,6} 
 
 /** define player */
 typedef struct {

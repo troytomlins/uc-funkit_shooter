@@ -4,7 +4,6 @@
     @brief  Prompts and waits for players to ready up
 */
 
-#include "system.h"
 #include "navswitch.h"
 #include "tinygl.h"
 #include "pacer.h"
@@ -20,8 +19,10 @@ void ready_up(void)
     tinygl_font_set (&font3x5_1);
     tinygl_text_speed_set (MESSAGE_RATE);
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
+
     //the extra spaces at the start give a "wrap around" feel to the scrolling
-    tinygl_text ("  PRESS TO START"); 
+    tinygl_text (START_TEXT); 
 	pacer_init (PACER_RATE);
 
     // waits for both player and opponent to be ready
@@ -37,10 +38,9 @@ void ready_up(void)
 
         if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
 			//if player readies up and isnt already ready, change state to reflect that
-			tinygl_clear();
             ready = true;
-			tinygl_text("  READY!");
-			ir_uart_putc(1); // Tells opponent that player is ready
+			tinygl_text(READY_TEXT);
+			ir_uart_putc(READY_CODE); // Tells opponent that player is ready
         }
 
         if (ir_uart_read_ready_p () && !opponent_ready) {
@@ -49,11 +49,10 @@ void ready_up(void)
             uint8_t in;
             in = ir_uart_getc ();
 
-            if(in == 1) {
-				tinygl_clear();
+            if(in == READY_CODE) {
 				// If input is 1, opponent has readied up
                 opponent_ready = true;
-				tinygl_text("  OPPONENT READY!");
+				tinygl_text(OPPONENT_READY_TEXT);
             }
         }
     }

@@ -5,11 +5,7 @@
 */
 
 #include "tinygl.h"
-#include "system.h"
-#include "led.h"
 #include "shells.h"
-
-
 
 static shell_t shells[MAX_SHELLS];
 
@@ -63,7 +59,7 @@ void move_shells(void)
         shell_t* shell = &(shells[i]);
         tinygl_draw_point(shell->pos, 0);
         // if the shell is active and TICK_THRESHOLD has been reached, move the shell
-        if(shell->active && (shell->move_tick++ == 5)) {
+        if(shell->active && (shell->move_tick++ == TICK_TO_MOVE)) {
             // note the if statement increments move-tick, regardless of true or false
             shell->pos.y ++;
             shell->move_tick = 0;

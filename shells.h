@@ -6,11 +6,10 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-#include "system.h"
 #include "tinygl.h"
 
 #define MAX_SHELLS 5
-#define TICK_THRESHOLD 5
+#define TICK_TO_MOVE 5 // amount of game ticks needed to make a shell move
 
 // define custom object type "shell"
 typedef struct {

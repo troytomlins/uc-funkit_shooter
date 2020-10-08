@@ -21,3 +21,9 @@ Lives:
     - 2 lives: After getting hit once, the blue LED will start flashing
     - last life: When you are on your final life, the blue LED will turn off
  - When you run out of lives, you lose the game
+
+
+Techincal info
+IR Comms Codes:
+0-4 = shot sent/received from x xoord 0-4
+10 = player ready
