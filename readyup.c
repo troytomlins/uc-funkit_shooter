@@ -12,8 +12,6 @@
 #include "ir_uart.h"
 #include "readyup.h"
 
-#define LOOP_RATE 300
-#define MESSAGE_RATE 10
 
 // displays and waits until players are ready before allowing game to proceed
 void ready_up(void)
@@ -22,9 +20,10 @@ void ready_up(void)
     tinygl_font_set (&font3x5_1);
     tinygl_text_speed_set (MESSAGE_RATE);
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
-    tinygl_text ("Press on navstick to start");
-    
+    //the extra spaces at the start give a "wrap around" feel to the scrolling
+    tinygl_text ("  PRESS TO START"); 
+	pacer_init (PACER_RATE);
+
     // waits for both player and opponent to be ready
     bool ready = false;
     bool opponent_ready = false;
@@ -36,24 +35,30 @@ void ready_up(void)
 
         navswitch_update ();
 
-        if (navswitch_push_event_p (NAVSWITCH_PUSH)) {
-			// if the player readies up, display READY
+        if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
+			//if player readies up and isnt already ready, change state to reflect that
+			tinygl_clear();
             ready = true;
-			tinygl_text("READY!");
+			tinygl_text("  READY!");
+			ir_uart_putc(1); // Tells opponent that player is ready
         }
 
-        if (ir_uart_read_ready_p ()) {
-			// If recieved input
+        if (ir_uart_read_ready_p () && !opponent_ready) {
+			// If recieved ir input and opponent is not ready, check if input is valid
+			// then update message state to reflect opponent status
             uint8_t in;
             in = ir_uart_getc ();
 
             if(in == 1) {
+				tinygl_clear();
 				// If input is 1, opponent has readied up
                 opponent_ready = true;
-				tinygl_text("OPPONENT READY!");
+				tinygl_text("  OPPONENT READY!");
             }
         }
     }
-    // both players are ready, return to game.c
+
+    // both players are ready, clear display and let the game run
+	tinygl_clear();
 }
 

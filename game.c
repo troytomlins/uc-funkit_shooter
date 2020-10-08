@@ -19,12 +19,12 @@
 #include "shells.h"
 #include "led.h"
 #include "readyup.h"
+#include "game.h"
 
-/* Define polling rates in Hz.  */
-#define GAME_TICK_RATE 10
-#define INPUT_RATE 10
-#define DISPLAY_RATE 200
+static bool start_game = false;
 
+// cleans an ir input to make sure it is valid (prevents invalid ir inputs)
+// a safety precaution against crashes.
 static bool clean_ir(int8_t in)
 {
     if(in >= 0 && in <= 4) {
@@ -33,6 +33,16 @@ static bool clean_ir(int8_t in)
         return false;
     }
 }
+
+// inits all the systems needed for the game
+static void game_init(void)
+{
+    system_init ();
+    navswitch_init();
+    tinygl_init(DISPLAY_RATE);
+    ir_uart_init();
+}
+
 
 // this task processes inputs from player and ir
 void process_input(__unused__ void *data)
@@ -43,6 +53,7 @@ void process_input(__unused__ void *data)
     if (ir_uart_read_ready_p()) {
         int8_t incoming_shot = ir_uart_getc();
         if(clean_ir(incoming_shot)) {
+			// only create the shell if the shot is valid
             create_shell(incoming_shot);
         }
     }
@@ -57,27 +68,18 @@ void update_game(__unused__ void *data)
 // updates display to match game information
 void update_display(__unused__ void *data)
 {
+	led_set(LED1, 1);
     draw_shoot_beam();
     draw_shells();
     draw_player();
     tinygl_update();
 }
 
-// inits all the systems needed for the game
-static void game_init(void)
-{
-    system_init ();
-    navswitch_init();
-    display_init();
-    tinygl_init(DISPLAY_RATE);
-    ir_uart_init();
-}
-
 int main (void)
 {
-    //ready_up();// only proceeds after both players ready up
-    game_init();
-
+	game_init();
+    ready_up();// only proceeds after both players ready up
+	
     task_t tasks[] = {
         {
             .func = process_input, .period = TASK_RATE / INPUT_RATE,
