@@ -9,6 +9,11 @@
 #include "system.h"
 #include "tinygl.h"
 
+// FORCES PLAYER TO SHOOT AT THEMSELVES
+// TEST CODE REMOVE LATER
+void test_shot(int8_t x);
+
+
 // draws the shooting beam
 void draw_shoot_beam(void);
 

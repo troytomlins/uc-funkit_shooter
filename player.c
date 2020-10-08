@@ -7,6 +7,7 @@
 
 #include "tinygl.h"
 #include "navswitch.h"
+#include "shoot.h"
 
 
 /** define player */
@@ -32,6 +33,13 @@ static void move_player(int inc)
     }
 }
 
+// returns player's x position
+tinygl_point_t get_player_pos(void)
+{
+    return player.pos;
+}
+
+
 void take_input(void)
 {
     navswitch_update();
@@ -42,9 +50,7 @@ void take_input(void)
     } else if (navswitch_push_event_p(3)) {
         move_player(-1);
     } else if (navswitch_push_event_p (4)) {
-        // player shooting
-        tinygl_point_t player_pos = get_player_pos();
-        start_shot(player_pos.x);
+        start_shot(player.pos.x);
     }
 }
 
@@ -55,11 +61,6 @@ void draw_player(void)
     tinygl_draw_point(player.pos, 1);
 }
 
-// returns player's x position
-tinygl_point_t get_player_pos(void)
-{
-    return player.pos;
-}
 
 
 

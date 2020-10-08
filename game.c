@@ -10,6 +10,7 @@
 #include "pio.h"
 #include "pacer.h"
 #include "tinygl.h"
+#include "navswitch.h"
 #include "ir_uart.h"
 #include "shoot.h"
 #include "player.h"
@@ -22,8 +23,6 @@
 #define GAME_TICK_RATE 10
 #define INPUT_RATE 10
 #define DISPLAY_RATE 200
-
-static int8_t player_pos;
 
 // this task processes inputs from player and ir
 void process_input(__unused__ void *data)
@@ -60,7 +59,6 @@ static void game_init(void)
     display_init();
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
-    create_shell(3); //TEST SHELL
 }
 
 
