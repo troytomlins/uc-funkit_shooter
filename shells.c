@@ -9,14 +9,7 @@
 #include "led.h"
 #include "shells.h"
 
-#define MAX_SHELLS 5
-#define TICK_THRESHOLD 5
-// define custom object type "shell"
-typedef struct {
-    tinygl_point_t pos;
-    int move_tick;
-    bool active;
-} shell_t;
+
 
 static shell_t shells[MAX_SHELLS];
 

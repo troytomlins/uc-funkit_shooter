@@ -9,9 +9,8 @@
 #include "system.h"
 #include "tinygl.h"
 
-// FORCES PLAYER TO SHOOT AT THEMSELVES
-// TEST CODE REMOVE LATER
-void test_shot(int8_t x);
+#define SHOT_COOLDOWN 5
+#define VISUAL_COOLDOWN 1
 
 
 // draws the shooting beam

@@ -8,15 +8,9 @@
 #include "tinygl.h"
 #include "navswitch.h"
 #include "shoot.h"
+#include "player.h"
 
-
-/** define player */
-typedef struct {
-    tinygl_point_t pos;
-} player_t;
-
-
-static player_t player = {{2,6}};
+static player_t player = {PLAYER_START_POS};
 
 /** Updates Player's location */
 static void move_player(int inc)

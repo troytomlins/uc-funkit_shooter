@@ -9,6 +9,16 @@
 #include "system.h"
 #include "tinygl.h"
 
+#define MAX_SHELLS 5
+#define TICK_THRESHOLD 5
+
+// define custom object type "shell"
+typedef struct {
+    tinygl_point_t pos;
+    int move_tick;
+    bool active;
+} shell_t;
+
 // creates a shell
 void create_shell(int8_t x);
 

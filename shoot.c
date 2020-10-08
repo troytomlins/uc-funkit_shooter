@@ -10,9 +10,6 @@
 #include "shells.h"
 #include "shoot.h"
 
-#define SHOT_COOLDOWN 5
-#define VISUAL_COOLDOWN 1
-
 static int shot_dis = 0; // Shot display timer
 static int shot_cd = 0;
 static bool shot_on = false;
@@ -34,6 +31,23 @@ void draw_shoot_beam(void)
     }
 }
 
+// mirrors a shot on the x axis
+// required because players are opposite one another and their funkits are mirrored
+static int8_t mirror_shot(uint8_t shot){
+	switch(shot){
+		case 0:
+			return 4;
+		case 1:
+			return 3;
+		case 2:
+			return 2;
+		case 3:
+			return 1;
+	}
+	// case 4:
+	return 0;
+}
+
 // instantiates a shot
 void start_shot(int8_t shot)
 {
@@ -43,7 +57,7 @@ void start_shot(int8_t shot)
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN;
         shot_cd = SHOT_COOLDOWN;
-        ir_uart_putc(shot_col); // Sends to other player
+        ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
     }
 }
 

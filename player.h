@@ -10,6 +10,13 @@
 #include "system.h"
 #include "tinygl.h"
 
+#define PLAYER_START_POS {2,6}
+
+/** define player */
+typedef struct {
+    tinygl_point_t pos;
+} player_t;
+
 // processes any navswitch inputs
 void take_input(void);
 
