@@ -1,5 +1,5 @@
 # File:   Makefile
-# Author: W Chen
+# Authors: William Chen, Troy Tomlins
 # Date:   7th Oct
 # Descr:  Makefile for game
 
@@ -17,7 +17,7 @@ all: game.out
 
 # Compile: create object files from C source files.
 
-game.o: game.c ../../drivers/avr/system.h ../../drivers/navswitch.h ../../drivers/avr/pio.h ../../drivers/ledmat.h ../../utils/pacer.h ../../drivers/avr/timer.h ../../utils/tinygl.h ../../drivers/display.h ../../utils/font.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h ../../drivers/avr/prescale.h ../../utils/task.h ../../utils/tinygl.h shells.h ../../drivers/led.h player.h
+game.o: game.c ../../drivers/avr/system.h ../../drivers/avr/pio.h ../../drivers/ledmat.h ../../utils/pacer.h ../../drivers/avr/timer.h ../../utils/tinygl.h ../../drivers/display.h ../../utils/font.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h ../../drivers/avr/prescale.h ../../utils/task.h ../../utils/tinygl.h shells.h ../../drivers/led.h player.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 shells.o: shells.c ../../utils/tinygl.h ../../drivers/avr/system.h shells.h ../../drivers/led.h
@@ -68,7 +68,7 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h
 led.o: ../../drivers/led.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/led.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-player.o: player.c player.h
+player.o: player.c player.h ../../drivers/navswitch.h 
 	$(CC) -c $(CFLAGS) $< -o $@
 
 shoot.o: shoot.c shoot.h ../../drivers/avr/ir_uart.h

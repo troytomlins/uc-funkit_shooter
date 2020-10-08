@@ -1,7 +1,8 @@
 /** @file   shoot.c
-    @author Troy Tomlins
+    @author Troy Tomlins, William Chen
     @date   7th Oct
-    @brief  Shoot module
+    @brief  Shoot module, responsible for instantiating the shoot beam and
+    player firing
 */
 
 #include "tinygl.h"
@@ -10,29 +11,29 @@
 
 static int shot_cd = 0; // Shot cooldown timer
 static int shot_dis = 0; // Shot display timer
-static bool shot_on = false; 
+static bool shot_on = false;
 static int8_t shot_col; // Shot column
 
 // draws the shoot beam
 void draw_shoot_beam(void)
 {
-    if(shot_on){
-		tinygl_point_t pos1 = {shot_col,0};
-		tinygl_point_t pos2 = {shot_col,6};
-		tinygl_draw_line(pos1, pos2, 1);
-	} else {
-		tinygl_point_t pos1 = {shot_col,0};
-		tinygl_point_t pos2 = {shot_col,6};
-		tinygl_draw_line(pos1, pos2, 0);
-	}
+    if(shot_on) {
+        tinygl_point_t pos1 = {shot_col,0};
+        tinygl_point_t pos2 = {shot_col,6};
+        tinygl_draw_line(pos1, pos2, 1);
+    } else {
+        tinygl_point_t pos1 = {shot_col,0};
+        tinygl_point_t pos2 = {shot_col,6};
+        tinygl_draw_line(pos1, pos2, 0);
+    }
 }
 
 // instantiates a shot
 void start_shot(int8_t shot)
 {
-    if (shot_cd == 0) {
+    if (!shot_on) {
         shot_col = shot;
-		shot_on = true;
+        shot_on = true;
         shot_dis = 1;
         shot_cd = 1;
         ir_uart_putc(shot_col); // Sends to other player

@@ -1,5 +1,12 @@
+/** @file   player.c
+    @authors Troy Tomlins, William Chen
+    @date   8th Oct
+    @brief  Core game module. Responsible for initialising the game, and starting the 
+    tasks scheduler.
+*/
+
+
 #include "system.h"
-#include "navswitch.h"
 #include "pio.h"
 #include "pacer.h"
 #include "tinygl.h"
@@ -18,48 +25,36 @@
 
 static int8_t player_pos;
 
-// this task processes player input
-void process_input(__unused__ void *data){
-    navswitch_update();
+// this task processes inputs from player and ir
+void process_input(__unused__ void *data)
+{
+    take_input(); // processes any player input
 
-    // Checks position change, then changes player by the direction moved
-    if (navswitch_push_event_p (1))
-    {
-        update_player(1);
-    } 
-	else if (navswitch_push_event_p(3))
-    {
-        update_player(-1);
-    } 
-    else if (navswitch_push_event_p (4))
-    {
-		// player shooting
-        player_pos = get_player_pos();
-        start_shot(player_pos);
-    }
     // Checks for incoming shot from opponent
-    if (ir_uart_read_ready_p())
-    {
+    if (ir_uart_read_ready_p()) {
         int8_t incoming_shot = ir_uart_getc();
         create_shell(incoming_shot);
     }
 }
 // updates the game information
-void update_game(__unused__ void *data){
-	update_shoot_beam();
+void update_game(__unused__ void *data)
+{
+    update_shoot_beam();
     move_shells();
 }
 
 // updates display to match game information
-void update_display(__unused__ void *data){
-	draw_shoot_beam();
-	draw_shells();
-	draw_player();
+void update_display(__unused__ void *data)
+{
+    draw_shoot_beam();
+    draw_shells();
+    draw_player();
     tinygl_update();
 }
 
 // inits all the systems needed for the game
-static void game_init(void){
+static void game_init(void)
+{
     system_init ();
     navswitch_init();
     display_init();
@@ -71,15 +66,20 @@ static void game_init(void){
 
 int main (void)
 {
-	game_init();
-    task_t tasks[] =
-    {
-		{.func = process_input, .period = TASK_RATE / INPUT_RATE,
-         .data = 0},
-        {.func = update_game, .period = TASK_RATE / GAME_TICK_RATE,
-         .data = 0},
-        {.func = update_display, .period = TASK_RATE / DISPLAY_RATE,
-         .data = 0}
+    game_init();
+    task_t tasks[] = {
+        {
+            .func = process_input, .period = TASK_RATE / INPUT_RATE,
+            .data = 0
+        },
+        {
+            .func = update_game, .period = TASK_RATE / GAME_TICK_RATE,
+            .data = 0
+        },
+        {
+            .func = update_display, .period = TASK_RATE / DISPLAY_RATE,
+            .data = 0
+        }
     };
 
     task_schedule (tasks, ARRAY_SIZE (tasks));

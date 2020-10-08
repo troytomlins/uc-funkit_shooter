@@ -1,8 +1,7 @@
-
 /** @file   shell.c
-    @author W Chen
+    @authors William Chen, Troy Tomlins
     @date   7th Oct
-    @brief  Shells module
+    @brief  Shells module, responsible for instantiating, moving, and deleting shells
 */
 
 #include "tinygl.h"
@@ -66,22 +65,22 @@ void draw_shells(void)
 //moves all active shells and deactivates shells if they go off the ledmat
 void move_shells(void)
 {
-	//cycle through shells, moving each one
-	int i;
-	for(i=0; i<MAX_SHELLS; i++) {
-		shell_t* shell = &shells.array[i];
-		tinygl_draw_point(shell->pos, 0);
-		// if the shell is active and TICK_THRESHOLD has been reached, move the shell
-		if(shell->active && (shell->move_tick++ == 5)) {
-			// note the if statement increments move-tick, regardless of true or false
-			shell->pos.y ++;
-			shell->move_tick = 0;
-			//if shell is off ledmat, deactivate
-			if(shell->pos.y > 6) {
-				deactivate_shell(shell);
-			}
-		}
-	}
+    //cycle through shells, moving each one
+    int i;
+    for(i=0; i<MAX_SHELLS; i++) {
+        shell_t* shell = &shells.array[i];
+        tinygl_draw_point(shell->pos, 0);
+        // if the shell is active and TICK_THRESHOLD has been reached, move the shell
+        if(shell->active && (shell->move_tick++ == 5)) {
+            // note the if statement increments move-tick, regardless of true or false
+            shell->pos.y ++;
+            shell->move_tick = 0;
+            //if shell is off ledmat, deactivate
+            if(shell->pos.y > 6) {
+                deactivate_shell(shell);
+            }
+        }
+    }
 }
 
 
