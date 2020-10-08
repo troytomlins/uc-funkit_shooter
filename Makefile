@@ -17,10 +17,13 @@ all: game.out
 
 # Compile: create object files from C source files.
 
-game.o: game.c ../../drivers/avr/system.h ../../drivers/avr/pio.h ../../drivers/ledmat.h ../../utils/pacer.h ../../drivers/avr/timer.h ../../utils/tinygl.h ../../drivers/display.h ../../utils/font.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h ../../drivers/avr/prescale.h ../../utils/task.h ../../utils/tinygl.h shells.h ../../drivers/led.h player.h
+game.o: game.c ../../drivers/avr/system.h ../../drivers/avr/pio.h ../../drivers/ledmat.h ../../utils/pacer.h ../../drivers/avr/timer.h ../../utils/tinygl.h ../../drivers/display.h ../../utils/font.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/usart1.h ../../drivers/avr/prescale.h ../../utils/task.h ../../utils/tinygl.h shells.h ../../drivers/led.h player.h readyup.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 shells.o: shells.c ../../utils/tinygl.h ../../drivers/avr/system.h shells.h ../../drivers/led.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+readyup.o: readyup.c readyup.h ../../drivers/avr/ir_uart.h ../../utils/font.h ../../utils/tinygl.h ../../drivers/avr/system.h ../../drivers/navswitch.h ../../utils/pacer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
@@ -75,7 +78,7 @@ shoot.o: shoot.c shoot.h ../../drivers/avr/ir_uart.h shells.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o navswitch.o pio.o ledmat.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o
+game.out: game.o system.o navswitch.o readyup.o pio.o ledmat.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

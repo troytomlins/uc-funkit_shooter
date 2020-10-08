@@ -7,6 +7,8 @@
 #include "tinygl.h"
 #include "system.h"
 #include "led.h"
+#include "shells.h"
+
 #define MAX_SHELLS 5
 #define TICK_THRESHOLD 5
 // define custom object type "shell"

@@ -8,6 +8,7 @@
 #include "tinygl.h"
 #include "ir_uart.h"
 #include "shells.h"
+#include "shoot.h"
 
 #define SHOT_COOLDOWN 5
 #define VISUAL_COOLDOWN 1
@@ -17,12 +18,6 @@ static int shot_cd = 0;
 static bool shot_on = false;
 static bool shot_ready = true;
 static int8_t shot_col; // Shot column
-
-// TEST CODE, MAKES PLAYER TO SHOOT AT THEMSELVES
-// REMOVE LATER
-void test_shot(int8_t x){
-	create_shell(x);
-}
 
 
 // draws the shoot beam
@@ -42,14 +37,13 @@ void draw_shoot_beam(void)
 // instantiates a shot
 void start_shot(int8_t shot)
 {
-    if (shot_loaded) {
+    if (shot_ready) {
         shot_col = shot;
         shot_on = true;
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN;
         shot_cd = SHOT_COOLDOWN;
         ir_uart_putc(shot_col); // Sends to other player
-        test_shot(shot); // TEST SHOT, REMOVE LATER
     }
 }
 

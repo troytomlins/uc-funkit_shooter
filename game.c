@@ -1,7 +1,7 @@
 /** @file   player.c
     @authors Troy Tomlins, William Chen
     @date   8th Oct
-    @brief  Core game module. Responsible for initialising the game, and starting the 
+    @brief  Core game module. Responsible for initialising the game, and starting the
     tasks scheduler.
 */
 
@@ -18,11 +18,21 @@
 #include "tinygl.h"
 #include "shells.h"
 #include "led.h"
+#include "readyup.h"
 
 /* Define polling rates in Hz.  */
 #define GAME_TICK_RATE 10
 #define INPUT_RATE 10
 #define DISPLAY_RATE 200
+
+static bool clean_ir(int8_t in)
+{
+    if(in >= 0 && in <= 4) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 // this task processes inputs from player and ir
 void process_input(__unused__ void *data)
@@ -32,7 +42,9 @@ void process_input(__unused__ void *data)
     // Checks for incoming shot from opponent
     if (ir_uart_read_ready_p()) {
         int8_t incoming_shot = ir_uart_getc();
-        create_shell(incoming_shot);
+        if(clean_ir(incoming_shot)) {
+            create_shell(incoming_shot);
+        }
     }
 }
 // updates the game information
@@ -61,10 +73,11 @@ static void game_init(void)
     ir_uart_init();
 }
 
-
 int main (void)
 {
+    //ready_up();// only proceeds after both players ready up
     game_init();
+
     task_t tasks[] = {
         {
             .func = process_input, .period = TASK_RATE / INPUT_RATE,

@@ -45,11 +45,11 @@ void take_input(void)
     navswitch_update();
 
     // Checks position change, then changes player by the direction moved
-    if (navswitch_push_event_p (1)) {
+    if (navswitch_push_event_p (NAVSWITCH_EAST)) {
         move_player(1);
-    } else if (navswitch_push_event_p(3)) {
+    } else if (navswitch_push_event_p(NAVSWITCH_WEST)) {
         move_player(-1);
-    } else if (navswitch_push_event_p (4)) {
+    } else if (navswitch_push_event_p (NAVSWITCH_PUSH)) {
         start_shot(player.pos.x);
     }
 }
