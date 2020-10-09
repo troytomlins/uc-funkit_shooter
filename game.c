@@ -17,6 +17,7 @@
 #include "led.h" //TEST COMPONENT
 #include "readyup.h"
 #include "game.h"
+#include "button.h"
 
 // cleans an ir input to make sure it is valid (prevents invalid ir inputs)
 // a safety precaution against crashes.
@@ -36,6 +37,7 @@ static void game_init(void)
     navswitch_init();
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
+    button_init();
 }
 
 
@@ -48,7 +50,7 @@ void process_input(__unused__ void *data)
     if (ir_uart_read_ready_p()) {
         int8_t incoming_shot = ir_uart_getc();
         if(clean_ir(incoming_shot)) {
-			// only create the shell if the shot is valid
+            // only create the shell if the shot is valid
             create_shell(incoming_shot);
         }
     }
@@ -63,7 +65,7 @@ void update_game(__unused__ void *data)
 // updates display to match game information
 void update_display(__unused__ void *data)
 {
-	led_set(LED1, 1);
+    led_set(LED1, 1);
     draw_shoot_beam();
     draw_shells();
     draw_player();
@@ -72,9 +74,13 @@ void update_display(__unused__ void *data)
 
 int main (void)
 {
-	game_init();
-    ready_up();// COMMENT THIS OUT TO SKIP READYUP STAGE
-	
+    game_init();
+    button_update();
+    // Hold down the button to skip the readyup phase
+    // This is for testing purposes
+    if(!button_down_p(0)) {
+        ready_up();
+    }
     task_t tasks[] = {
         {
             .func = process_input, .period = TASK_RATE / INPUT_RATE,
