@@ -1,6 +1,5 @@
 TODO:  (P = Priority, E = Extra)
 E- include how many lives were remaining for the winner
-E- have the option to play again
 E- Have the blue LED show lives remaining (partially implemented)
 E- Give the player a certain amount of invulnerability time after getting hit
 E- Tweak fire rate and shell movement to make game more interesting
@@ -27,6 +26,10 @@ Lives:
     - 2 lives: After getting hit once, the blue LED will start flashing
     - last life: When you are on your final life, the blue LED will turn off
  - When you run out of lives, you lose the game
+
+Game Over:
+ - When the game is over, text will scroll telling you if you won or lost and ask if you want to play again.
+ - Once both players press ready the game will restart.
 
 
 CODE INFORMATION
