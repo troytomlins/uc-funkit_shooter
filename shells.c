@@ -54,8 +54,9 @@ void draw_shells(void)
 /** Moves all active shells and deactivates shells if they go off the ledmat */
 void move_shells(void)
 {
+	uint8_t i;
     // Cycle through shells, moving each one
-    for(uint8_t i=0; i<MAX_SHELLS; i++) {
+    for(i=0; i<MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
         tinygl_draw_point(shell->pos, 0);
         // If the shell is active and TICK_THRESHOLD has been reached, move the shell
