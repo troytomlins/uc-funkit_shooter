@@ -40,9 +40,8 @@ static void deactivate_shell(shell_t* shell)
 /** draws all shells */
 void draw_shells(void)
 {
-    uint8_t i;
     //cycle through shells, drawing each one
-    for(i=0; i<MAX_SHELLS; i++) {
+    for(uint8_t i=0; i<MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
         //only draw if shell is active
         if(shell->active) {
