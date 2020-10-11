@@ -9,7 +9,7 @@
 // Starting number of lives
 #define LIVES_NUM 3
 
-void led_state(void);
+void show_lives(void);
 
 void check_hit(uint8_t shell_pos);
 

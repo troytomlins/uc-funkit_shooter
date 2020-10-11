@@ -76,7 +76,7 @@ static void update_display(__unused__ void *data)
     draw_shells();
     draw_player();
     tinygl_update();
-    led_state();
+	show_lives();
 }
 
 

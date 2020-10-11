@@ -11,7 +11,7 @@
 
 static int lives;
 
-void led_state(void)
+void show_lives(void)
 {
     if (lives==3)
     {
