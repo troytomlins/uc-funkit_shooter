@@ -12,52 +12,52 @@
 #include "readyup.h"
 
 
-// displays and waits until players are ready before allowing game to proceed
+/** displays and waits until players are ready before allowing game to proceed */
 void ready_up(void)
 {
-	// set up tinygl and displays start game message
+    // set up tinygl and displays start game message
     tinygl_font_set (&font3x5_1);
     tinygl_text_speed_set (MESSAGE_RATE);
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
     tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
 
     //the extra spaces at the start give a "wrap around" feel to the scrolling
-    tinygl_text (START_TEXT); 
-	pacer_init (PACER_RATE);
+    tinygl_text (START_TEXT);
+    pacer_init (PACER_RATE);
 
     // waits for both player and opponent to be ready
     bool ready = false;
     bool opponent_ready = false;
     while(!(ready && opponent_ready)) {
-		// note that while waiting for player to be ready,
-		// opponent can ready up first
+        // note that while waiting for player to be ready,
+        // opponent can ready up first
         pacer_wait ();
         tinygl_update ();
 
         navswitch_update ();
 
         if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
-			//if player readies up and isnt already ready, change state to reflect that
+            //if player readies up and isnt already ready, change state to reflect that
             ready = true;
-			tinygl_text(READY_TEXT);
-			ir_uart_putc(READY_CODE); // Tells opponent that player is ready
+            tinygl_text(READY_TEXT);
+            ir_uart_putc(READY_CODE); // Tells opponent that player is ready
         }
 
         if (ir_uart_read_ready_p () && !opponent_ready) {
-			// If recieved ir input and opponent is not ready, check if input is valid
-			// then update message state to reflect opponent status
+            // If recieved ir input and opponent is not ready, check if input is valid
+            // then update message state to reflect opponent status
             uint8_t in;
             in = ir_uart_getc ();
 
             if(in == READY_CODE) {
-				// If input is 1, opponent has readied up
+                // If input is 1, opponent has readied up
                 opponent_ready = true;
-				tinygl_text(OPPONENT_READY_TEXT);
+                tinygl_text(OPPONENT_READY_TEXT);
             }
         }
     }
 
     // both players are ready, clear display and let the game run
-	tinygl_clear();
+    tinygl_clear();
 }
 

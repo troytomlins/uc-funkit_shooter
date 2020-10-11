@@ -9,7 +9,7 @@
 
 #include "tinygl.h"
 
-#define PLAYER_START_POS {2,6} 
+#define PLAYER_START_POS {2,6} // Player start pos
 
 /** define player */
 typedef struct {

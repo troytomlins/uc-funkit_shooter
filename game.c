@@ -13,15 +13,15 @@
 #include "task.h"
 #include "navswitch.h"
 #include "shells.h"
-#include "led.h" //TEST COMPONENT
+#include "led.h"
 #include "readyup.h"
 #include "button.h"
 #include "gameover.h"
 #include "game.h"
 #include "lives.h"
 
-// cleans an ir input to make sure it is valid (prevents invalid ir inputs)
-// a safety precaution against crashes.
+/** cleans an ir input to make sure it is valid (prevents invalid ir inputs)
+    a safety precaution against crashes. */
 static bool clean_ir(int8_t in)
 {
     if(in >= 0 && in <= 4) {
@@ -31,7 +31,7 @@ static bool clean_ir(int8_t in)
     }
 }
 
-// inits all the systems needed for the game
+/** Initializes all the systems needed for the game */
 static void game_init(void)
 {
     system_init ();
@@ -39,11 +39,11 @@ static void game_init(void)
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
     button_init();
-    set_lives();
+    set_lives(); // Sets default number of lives
 }
 
 
-// this task processes inputs from player and ir
+/** This task processes inputs from player and ir */
 static void process_input(__unused__ void *data)
 {
     take_input(); // processes any player input
@@ -55,31 +55,31 @@ static void process_input(__unused__ void *data)
         {
             game_over(1); // 1 indictates win
         }
-        else if(clean_ir(incoming))
+        else if(clean_ir(incoming)) // incoming shot
         {
             // only create the shell if the shot is valid
             create_shell(incoming);
         }
     }
 }
-// updates the game information
+/** Updates the game information */
 static void update_game(__unused__ void *data)
 {
     update_shoot_beam();
     move_shells();
 }
 
-// updates display to match game information
+/** Updates display to match game information */
 static void update_display(__unused__ void *data)
 {
     draw_shoot_beam();
     draw_shells();
     draw_player();
     tinygl_update();
-	show_lives();
+    show_lives();
 }
 
-
+/** Main function of game */
 int main (void)
 {
     game_init();

@@ -6,8 +6,9 @@
 #ifndef READYUP_H
 #define READYUP_H
 
-#define MESSAGE_RATE 30
-#define PACER_RATE 200
+/* Define Message data */
+#define MESSAGE_RATE 30 // Message rate
+#define PACER_RATE 200 // Pacer rate
 #define READY_CODE 13 //arbitrary as long as it isn't 0,1,2,3, or 4
 #define START_TEXT "  PRESS TO START"
 #define READY_TEXT "  READY!"
