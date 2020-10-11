@@ -9,8 +9,8 @@
 #include "system.h"
 #include "tinygl.h"
 
-#define SHOT_COOLDOWN 5
-#define VISUAL_COOLDOWN 1
+#define SHOT_COOLDOWN 50
+#define VISUAL_COOLDOWN 10
 
 
 // draws the shooting beam
