@@ -50,15 +50,15 @@ static void process_input(__unused__ void *data)
 
     // Checks for incoming shot from opponent
     if (ir_uart_read_ready_p()) {
-        int8_t incoming_shot = ir_uart_getc();
-        if (incoming_shot==OVER_CODE) // Game over win
+        int8_t incoming = ir_uart_getc();
+        if (incoming==OVER_CODE) // Game over win
         {
             game_over(1); // 1 indictates win
         }
-        else if(clean_ir(incoming_shot))
+        else if(clean_ir(incoming))
         {
             // only create the shell if the shot is valid
-            create_shell(incoming_shot);
+            create_shell(incoming);
         }
     }
 }
