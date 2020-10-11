@@ -8,6 +8,7 @@
 
 // Starting number of lives
 #define LIVES_NUM 3
+#define FLASH_TICKS 10
 
 void show_lives(void);
 
