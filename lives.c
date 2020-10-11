@@ -51,7 +51,7 @@ void check_hit(uint8_t shell_pos)
         if (!(lives==0)) {
             lives--;
         } else {
-            game_over(0,0); // 0 indictates loss
+            game_over(0); // 0 indictates loss
         }
     }
 }
