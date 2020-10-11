@@ -13,6 +13,7 @@
 #include "game.h"
 #include "readyup.h"
 #include "lives.h"
+#include "system.h"
 
 static bool ready;
 static bool opponent_ready;
@@ -41,7 +42,7 @@ static bool play_again(void)
     return (opponent_ready&&ready);
 }
 
-void game_over(int state)
+void game_over(int state, int lives_remaining)
 {
     ready = false;
     opponent_ready = false;
@@ -54,6 +55,8 @@ void game_over(int state)
     }
     else if (state == 1)
     {
+		char text = WIN_TEXT
+		sprintf(text, lives_remaining);
         tinygl_text (WIN_TEXT);
     }
     while(!restart)

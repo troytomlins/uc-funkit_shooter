@@ -9,11 +9,11 @@
 
 #define MESSAGE_RATE 30
 #define PACER_RATE 200
-#define WIN_TEXT "  YOU WIN   PRESS TO PLAY AGAIN"
+#define WIN_TEXT "  YOU WIN BY %d   PRESS TO PLAY AGAIN"
 #define LOSE_TEXT "  YOU LOSE   PRESS TO PLAY AGAIN"
 #define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
 
 // Stops game and displays game over
-void game_over(int state);
+void game_over(int state, int lives_remaining);
 
 #endif

@@ -1,6 +1,5 @@
 TODO:  (P = Priority, E = Extra)
 E- include how many lives were remaining for the winner
-E- Have the blue LED show lives remaining (partially implemented)
 E- Give the player a certain amount of invulnerability time after getting hit
 E- Tweak fire rate and shell movement to make game more interesting
 

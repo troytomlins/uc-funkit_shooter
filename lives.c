@@ -8,6 +8,7 @@
 #include "tinygl.h"
 #include "lives.h"
 #include "player.h"
+#include <stdio.h>
 
 static int lives;
 static bool flash_aid = false;
@@ -38,6 +39,10 @@ void show_lives(void)
     }
 }
 
+int get_lives(void){
+	return lives;
+}
+
 // Checks if shell_hits player
 void check_hit(uint8_t shell_pos)
 {
@@ -46,7 +51,7 @@ void check_hit(uint8_t shell_pos)
         if (!(lives==0)) {
             lives--;
         } else {
-            game_over(0); // 0 indictates loss
+            game_over(0,0); // 0 indictates loss
         }
     }
 }

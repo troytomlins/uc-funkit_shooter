@@ -53,7 +53,7 @@ static void process_input(__unused__ void *data)
         int8_t incoming = ir_uart_getc();
         if (incoming==OVER_CODE) // Game over win
         {
-            game_over(1); // 1 indictates win
+            game_over(1, get_lives()); // 1 indictates win
         }
         else if(clean_ir(incoming))
         {

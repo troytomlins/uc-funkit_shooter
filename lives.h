@@ -14,6 +14,8 @@ void show_lives(void);
 
 void check_hit(uint8_t shell_pos);
 
+int get_lives(void);
+
 void set_lives(void);
 
 #endif
