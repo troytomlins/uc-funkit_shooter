@@ -21,6 +21,11 @@
 
 static int lives;
 
+void restart_game(void)
+{
+    tinygl_clear();
+    lives = PLAYER_LIVES;
+}
 
 // cleans an ir input to make sure it is valid (prevents invalid ir inputs)
 // a safety precaution against crashes.
@@ -41,7 +46,7 @@ static void game_init(void)
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
     button_init();
-    lives = 3;
+    lives = PLAYER_LIVES;
 }
 
 
