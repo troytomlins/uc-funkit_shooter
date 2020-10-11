@@ -35,7 +35,7 @@ Game Over:
 CODE INFORMATION
  - IR Comms Codes:
 	0-4 = shot sent/received from x xoord 0-4
-	10 = player ready                                  13???????
+	13 = player ready 
     9 = game over
 
  - You can skip the readyup phase by holding the non-resetting button down while loading the game
