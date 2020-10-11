@@ -21,41 +21,6 @@
 
 static int lives;
 
-static void led_state(void)
-{
-    if (lives==3)
-    {
-        led_set (LED1, 0);
-    }
-    if (lives==2)
-    {
-        led_set (LED1, 1);
-    }
-    if (lives==1)
-    {
-        led_set (LED1, 0);
-    }
-    if (lives==0)
-    {
-        led_set (LED1, 1);
-    }
-}
-
-void check_hit(uint8_t shell_pos)
-{
-    tinygl_point_t player_pos = get_player_pos();
-    if (player_pos.x==shell_pos)
-    {
-        if (lives > 0)
-        {
-            lives--;
-        }
-        else
-        {
-            game_over(0); // 0 indictates loss
-        }
-    }
-}
 
 // cleans an ir input to make sure it is valid (prevents invalid ir inputs)
 // a safety precaution against crashes.
@@ -88,7 +53,7 @@ static void process_input(__unused__ void *data)
     // Checks for incoming shot from opponent
     if (ir_uart_read_ready_p()) {
         int8_t incoming_shot = ir_uart_getc();
-        if (incoming_shot==9) // Game over win
+        if (incoming_shot==OVER_CODE) // Game over win
         {
             game_over(1); // 1 indictates win
         }
