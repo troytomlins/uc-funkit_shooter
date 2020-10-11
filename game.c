@@ -17,10 +17,8 @@
 #include "readyup.h"
 #include "button.h"
 #include "gameover.h"
+#include "game.h"
 
-static int DISPLAY_RATE = 500;
-static int INPUT_RATE = 100;
-static int GAME_TICK_RATE = 100;
 static int lives;
 
 static void led_state(void)

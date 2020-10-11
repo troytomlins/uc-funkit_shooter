@@ -7,7 +7,8 @@
 #define GAME_H
 
 /* Define polling rates for game tasks in Hz.  */
-#define GAME_TICK_RATE 10 // game world updates every 100 ms
-#define INPUT_RATE 10 // gives a max 100ms input delay, insanely hard to notice
-#define DISPLAY_RATE 200
+#define GAME_TICK_RATE 100 
+#define INPUT_RATE 100 
+#define DISPLAY_RATE 500
+
 #endif

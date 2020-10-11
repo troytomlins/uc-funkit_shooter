@@ -1,8 +1,8 @@
 /** @file   player.c
     @authors Troy Tomlins, William Chen
     @date   7th Oct
-    @brief  Player module, responsible for processing player input and 
-    moving the player object
+    @brief  Player module, responsible for storing, changing, and displaying 
+    information on the player
 */
 
 #include "tinygl.h"
@@ -12,25 +12,26 @@
 
 static player_t player = {PLAYER_START_POS};
 
-/** Updates Player's location */
+/** Updates Player's location by changing its x position*/
 static void move_player(int inc)
 {
     // changes player x position by inc
     // un-draws player prior to moving
     // re-drawing unnecessary due to draw task is main game loop
 	tinygl_draw_point(player.pos, 0);
+	
 	// note that an extra 5 is added to pos.x to ensure it is positive 
 	// pos.x is also a signed int, so it can be momentarily negative
 	player.pos.x = (player.pos.x + inc + 5) % 5;
 }
 
-// returns player's x position
+// returns player's position
 tinygl_point_t get_player_pos(void)
 {
     return player.pos;
 }
 
-
+// checks for any player input and processes it.
 void take_input(void)
 {
     navswitch_update();
