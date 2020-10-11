@@ -55,7 +55,7 @@ void game_over(int state, int lives_remaining)
     }
     else if (state == 1)
     {
-		char text = WIN_TEXT
+		char text = WIN_TEXT;
 		sprintf(text, lives_remaining);
         tinygl_text (WIN_TEXT);
     }
