@@ -18,6 +18,9 @@
 static bool ready;
 static bool opponent_ready;
 
+/** Asks if user wants to play again.
+ *  Returns true if both players ready
+ */
 static bool play_again(void)
 {
     button_update();
@@ -42,6 +45,10 @@ static bool play_again(void)
     return (opponent_ready&&ready);
 }
 
+/** Game over.
+ * Displays if you won or lost  then asks if you want to play again.
+ * If players play again, clears tinygl and resets lives.
+ */
 void game_over(int state)
 {
     ready = false;
@@ -57,8 +64,8 @@ void game_over(int state)
     while(!restart) {
         pacer_wait ();
         tinygl_update ();
-        restart = play_again ();
+        restart = play_again (); // Returns bool if players want to play again
     }
-    tinygl_clear();
-    set_lives();
+    tinygl_clear(); // Clears tinygl
+    set_lives(); // Re sets lives to default
 }

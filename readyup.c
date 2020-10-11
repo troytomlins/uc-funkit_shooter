@@ -4,12 +4,12 @@
     @brief  Prompts and waits for players to ready up
 */
 
-#include "navswitch.h"
 #include "tinygl.h"
 #include "pacer.h"
 #include "../fonts/font3x5_1.h"
 #include "ir_uart.h"
 #include "readyup.h"
+#include "button.h"
 
 
 /** displays and waits until players are ready before allowing game to proceed */
@@ -34,9 +34,9 @@ void ready_up(void)
         pacer_wait ();
         tinygl_update ();
 
-        navswitch_update ();
+        button_update ();
 
-        if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
+        if (button_update() && !ready) {
             tinygl_clear();
             //if player readies up and isnt already ready, change state to reflect that
             ready = true;

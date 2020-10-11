@@ -6,6 +6,7 @@ Setting up:
  - When you start up the game, text will scroll prompting you to begin. Both player must be ready before the game begins
  - Sit opposite your opponent. Both player then set their funkits side by side so that each player's navsticks are on their right. 
  - Doing so should also align the ir emmiters and recievers. 
+ - To ready up, each player should press on the non-resetting button
 
 Moving the player:
  - Your player is at the bottom of the screen. Use the navstick to move it left and right.
