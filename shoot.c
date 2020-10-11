@@ -9,12 +9,18 @@
 #include "ir_uart.h"
 #include "shoot.h"
 
-static int shot_dis = 0; // Shot display timer
-static int shot_cd = 0;
-static bool shot_on = false; // States whether shot is on screen
-static bool shot_ready = true; // States if player can shoot
+static int shot_dis; // Shot display timer
+static int shot_cd;
+static bool shot_on; // States whether shot is on screen
+static bool shot_ready; // States if player can shoot
 static int8_t shot_col; // Shot column
 
+void init_shots(void){
+	shot_dis = 0;
+	shot_cd = 0;
+	shot_on = false;
+	shot_ready = true;
+}
 
 /** Draws the shoot beam */
 void draw_shoot_beam(void)

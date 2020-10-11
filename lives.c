@@ -11,8 +11,8 @@
 #include <stdio.h>
 
 static int lives;
-static bool flash_aid = false;
-static uint8_t flash_ticks = 0;
+static bool flash_aid;
+static uint8_t flash_ticks;
 
 /** Show number of lives */
 void show_lives(void)
@@ -59,4 +59,6 @@ void check_hit(uint8_t shell_pos)
 void set_lives(void)
 {
     lives = LIVES_NUM;
+    flash_aid = false;
+    flash_ticks = 0;
 }

@@ -12,7 +12,8 @@
 /* Defines cooldown times */
 #define SHOT_COOLDOWN 30
 #define VISUAL_COOLDOWN 10
-
+// inits the shots module
+void init_shots(void);
 
 // draws the shooting beam
 void draw_shoot_beam(void);
