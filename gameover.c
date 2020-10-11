@@ -18,6 +18,9 @@
 static bool ready;
 static bool opponent_ready;
 
+/** Asks if user wants to play again.
+ *  Returns true if both players ready
+ */
 static bool play_again(void)
 {
     navswitch_update();
@@ -42,27 +45,31 @@ static bool play_again(void)
     return (opponent_ready&&ready);
 }
 
+/** Game over.
+ * Displays if you won or lost  then asks if you want to play again.
+ * If players play again, clears tinygl and resets lives.
+ */
 void game_over(int state)
 {
     ready = false;
     opponent_ready = false;
     bool restart = false;
 
-    if (state == 0)
+    if (state == 0) // Loss state
     {
-        ir_uart_putc(OVER_CODE);
-        tinygl_text (LOSE_TEXT);
+        ir_uart_putc(OVER_CODE); // Tells other player the game is over
+        tinygl_text (LOSE_TEXT); // Displays Lose Text
     }
-    else if (state == 1)
+    else if (state == 1) // Win State
     {
-        tinygl_text (WIN_TEXT);
+        tinygl_text (WIN_TEXT); // Displays Win Text
     }
     while(!restart)
     {
         pacer_wait ();
         tinygl_update ();
-        restart = play_again ();
+        restart = play_again (); // Returns bool if players want to play again
     }
-    tinygl_clear();
-    set_lives();
+    tinygl_clear(); // Clears tinygl
+    set_lives(); // Re sets lives to default
 }
