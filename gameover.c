@@ -10,26 +10,55 @@
 #include "../fonts/font3x5_1.h"
 #include "ir_uart.h"
 #include "gameover.h"
+#include "game.h"
+
+static bool ready;
+static bool opponent_ready;
+
+static bool play_again(void)
+{
+    navswitch_update();
+    if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
+        //if player readies up and isnt already ready, change state to reflect that
+        ready = true;
+        tinygl_text(READY_TEXT);
+        ir_uart_putc(READY_CODE); // Tells opponent that player is ready
+    }
+    if (ir_uart_read_ready_p () && !opponent_ready) {
+        // If recieved ir input and opponent is not ready, check if input is valid
+        // then update message state to reflect opponent status
+        uint8_t in;
+        in = ir_uart_getc ();
+
+        if(in == READY_CODE) {
+            // If input is 1, opponent has readied up
+            opponent_ready = true;
+            tinygl_text(OPPONENT_READY_TEXT);
+        }
+    }
+    return (opponent_ready&&ready);
+}
 
 void game_over(int state)
 {
+    ready = false;
+    opponent_ready = false;
+    bool restart = false;
+
     if (state == 0)
     {
         ir_uart_putc(OVER_CODE);
         tinygl_text (LOSE_TEXT);
-        while(1)
-        {
-            pacer_wait ();
-            tinygl_update ();
-        }
     }
     else if (state == 1)
     {
         tinygl_text (WIN_TEXT);
-        while(1)
-        {
-            pacer_wait ();
-            tinygl_update ();
-        }
     }
+    while(!restart)
+    {
+        pacer_wait ();
+        tinygl_update ();
+        restart = play_again ();
+    }
+    restart_game();
 }

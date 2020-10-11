@@ -21,6 +21,12 @@
 
 static int lives;
 
+void restart_game(void)
+{
+    tinygl_clear();
+    lives = 3;
+}
+
 static void led_state(void)
 {
     if (lives==3)
