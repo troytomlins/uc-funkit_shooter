@@ -11,7 +11,7 @@
 #define INPUT_RATE 100
 #define DISPLAY_RATE 500
 #define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
-
+#define PLAYER_LIVES 3
 // checks if shell hits
 void check_hit(uint8_t shell_pos);
 
