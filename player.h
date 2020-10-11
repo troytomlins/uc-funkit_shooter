@@ -16,6 +16,9 @@ typedef struct {
     tinygl_point_t pos;
 } player_t;
 
+// places player at player start position
+void init_player(void)
+
 // processes any navswitch inputs
 void take_input(void);
 

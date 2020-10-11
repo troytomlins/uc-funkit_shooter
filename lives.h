@@ -1,5 +1,5 @@
 /** @file   lives.h
-    @author Troy Tomlins
+    @author Troy Tomlins, William Chen
     @date   11th Oct
     @brief  header for the lives count
 */

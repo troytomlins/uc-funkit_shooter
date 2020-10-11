@@ -1,5 +1,5 @@
 /** @file   readyup.c
-    @author William Chen
+    @author William Chen, Troy Tomlins
     @date   8th Oct
     @brief  Prompts and waits for players to ready up
 */

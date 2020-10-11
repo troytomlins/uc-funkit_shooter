@@ -1,5 +1,5 @@
 /** @file   gameover.h
-    @author Troy Tomlins
+    @author Troy Tomlins, William Chen
     @date   11th Oct
     @brief  Game Over module header
 */

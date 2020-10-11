@@ -10,7 +10,11 @@
 #include "shoot.h"
 #include "player.h"
 
-static player_t player = {PLAYER_START_POS}; // Default player start pos
+static player_t player; // Default player start pos
+
+void init_player(void){
+	player.pos = PLAYER_START_POS;
+}
 
 /** Updates Player's location by changing its x position*/
 static void move_player(int inc)

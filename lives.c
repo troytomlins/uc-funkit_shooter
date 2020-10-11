@@ -1,5 +1,5 @@
 /** @file   lives.c
-    @authors Troy Tomlins
+    @authors Troy Tomlins, William Chen
     @date   11th Oct
     @brief  Lives Modulo
 */

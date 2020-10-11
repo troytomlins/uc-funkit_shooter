@@ -1,5 +1,5 @@
 /** @file   gameover.c
-    @author Troy Tomlins
+    @authors Troy Tomlins, William Chen
     @date   8th Oct
     @brief  ends game
 */
