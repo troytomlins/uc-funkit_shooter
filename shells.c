@@ -65,6 +65,7 @@ void move_shells(void)
             shell->move_tick = 0;
             //if shell is off ledmat, deactivate
             if(shell->pos.y > 6) {
+                check_hit(shell->pos.x);
                 deactivate_shell(shell);
             }
         }

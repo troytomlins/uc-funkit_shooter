@@ -5,7 +5,6 @@
     tasks scheduler.
 */
 
-
 #include "system.h"
 #include "tinygl.h"
 #include "ir_uart.h"
@@ -16,8 +15,49 @@
 #include "shells.h"
 #include "led.h" //TEST COMPONENT
 #include "readyup.h"
-#include "game.h"
 #include "button.h"
+#include "gameover.h"
+
+static int DISPLAY_RATE = 500;
+static int INPUT_RATE = 100;
+static int GAME_TICK_RATE = 100;
+static int lives;
+
+static void led_state(void)
+{
+    if (lives==3)
+    {
+        led_set (LED1, 0);
+    }
+    if (lives==2)
+    {
+        led_set (LED1, 1);
+    }
+    if (lives==1)
+    {
+        led_set (LED1, 0);
+    }
+    if (lives==0)
+    {
+        led_set (LED1, 1);
+    }
+}
+
+void check_hit(uint8_t shell_pos)
+{
+    tinygl_point_t player_pos = get_player_pos();
+    if (player_pos.x==shell_pos)
+    {
+        if (lives > 0)
+        {
+            lives--;
+        }
+        else
+        {
+            game_over(0); // 0 indictates loss
+        }
+    }
+}
 
 // cleans an ir input to make sure it is valid (prevents invalid ir inputs)
 // a safety precaution against crashes.
@@ -38,39 +78,46 @@ static void game_init(void)
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
     button_init();
+    lives = 3;
 }
 
 
 // this task processes inputs from player and ir
-void process_input(__unused__ void *data)
+static void process_input(__unused__ void *data)
 {
     take_input(); // processes any player input
 
     // Checks for incoming shot from opponent
     if (ir_uart_read_ready_p()) {
         int8_t incoming_shot = ir_uart_getc();
-        if(clean_ir(incoming_shot)) {
+        if (incoming_shot==9) // Game over win
+        {
+            game_over(1); // 1 indictates win
+        }
+        else if(clean_ir(incoming_shot))
+        {
             // only create the shell if the shot is valid
             create_shell(incoming_shot);
         }
     }
 }
 // updates the game information
-void update_game(__unused__ void *data)
+static void update_game(__unused__ void *data)
 {
     update_shoot_beam();
     move_shells();
 }
 
 // updates display to match game information
-void update_display(__unused__ void *data)
+static void update_display(__unused__ void *data)
 {
-    led_set(LED1, 1);
     draw_shoot_beam();
     draw_shells();
     draw_player();
     tinygl_update();
+    led_state();
 }
+
 
 int main (void)
 {
