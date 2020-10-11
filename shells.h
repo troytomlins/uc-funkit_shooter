@@ -8,10 +8,10 @@
 
 #include "tinygl.h"
 
-#define MAX_SHELLS 5
+#define MAX_SHELLS 5 // Max number of shells
 #define TICK_TO_MOVE 5 // amount of game ticks needed to make a shell move
 
-// define custom object type "shell"
+/** define custom object type "shell" */
 typedef struct {
     tinygl_point_t pos;
     int move_tick;

@@ -11,12 +11,12 @@
 
 static int shot_dis = 0; // Shot display timer
 static int shot_cd = 0;
-static bool shot_on = false;
-static bool shot_ready = true;
+static bool shot_on = false; // States whether shot is on screen
+static bool shot_ready = true; // States if player can shoot
 static int8_t shot_col; // Shot column
 
 
-// draws the shoot beam
+/** Draws the shoot beam */
 void draw_shoot_beam(void)
 {
     if(shot_on) {
@@ -30,48 +30,48 @@ void draw_shoot_beam(void)
     }
 }
 
-// mirrors a shot on the x axis
-// required because players are opposite one another and their funkits are mirrored
+/** Mirrors a shot on the x axis.
+    Required because players are opposite one another and their funkits are mirrored */
 static int8_t mirror_shot(uint8_t shot){
-	switch(shot){
-		case 0:
-			return 4;
-		case 1:
-			return 3;
-		case 2:
-			return 2;
-		case 3:
-			return 1;
-	}
-	// case 4:
-	return 0;
+    switch(shot){
+        case 0:
+            return 4;
+        case 1:
+            return 3;
+        case 2:
+            return 2;
+        case 3:
+            return 1;
+    }
+    // case 4:
+    return 0;
 }
 
-// instantiates a shot
+/** Instantiates a shot */
 void start_shot(int8_t shot)
 {
     if (shot_ready) {
-        shot_col = shot;
+        shot_col = shot; // Sets shot column
         shot_on = true;
         shot_ready = false;
-        shot_dis = VISUAL_COOLDOWN;
-        shot_cd = SHOT_COOLDOWN;
+        shot_dis = VISUAL_COOLDOWN; // Sets visual cooldown
+        shot_cd = SHOT_COOLDOWN; // Sets shot cooldown
         ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
     }
 }
 
-// updates the shoot_beam information
+/** Updates the shoot_beam information */
 void update_shoot_beam(void)
 {
     // Checks if shot needs removed from screen
     if (shot_dis == 0) {
         shot_on = false;
     }
-    
+
     // checks if gun has been reloaded
     if(shot_cd == 0){
-		shot_ready = true;
-	}
+        shot_ready = true;
+    }
 
     // Checks if shot is still being displayed
     if (shot_dis > 0) {
