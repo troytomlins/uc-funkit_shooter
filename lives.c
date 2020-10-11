@@ -34,9 +34,6 @@ void show_lives(void)
     if (lives==1) {
         led_set (LED1, 0);
     }
-    if (lives==0) {
-        led_set (LED1, 0);
-    }
 }
 
 int get_lives(void){
@@ -48,7 +45,7 @@ void check_hit(uint8_t shell_pos)
 {
     tinygl_point_t player_pos = get_player_pos();
     if (player_pos.x==shell_pos) {
-        if (!(lives==0)) {
+        if (!(lives==1)) {
             lives--;
         } else {
             game_over(0); // 0 indictates loss
