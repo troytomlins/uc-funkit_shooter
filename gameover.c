@@ -12,6 +12,7 @@
 #include "gameover.h"
 #include "game.h"
 #include "readyup.h"
+#include "lives.h"
 
 static bool ready;
 static bool opponent_ready;
@@ -61,5 +62,6 @@ void game_over(int state)
         tinygl_update ();
         restart = play_again ();
     }
-    restart_game();
+    tinygl_clear();
+    set_lives();
 }
