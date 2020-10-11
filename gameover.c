@@ -4,7 +4,7 @@
     @brief  ends game
 */
 
-#include "navswitch.h"
+#include "button.h"
 #include "tinygl.h"
 #include "pacer.h"
 #include "../fonts/font3x5_1.h"
@@ -20,14 +20,14 @@ static bool opponent_ready;
 
 static bool play_again(void)
 {
-    navswitch_update();
-    if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
+    button_update();
+    if (button_update() && !ready) {
         //if player readies up and isnt already ready, change state to reflect that
         ready = true;
         tinygl_text(READY_TEXT);
         ir_uart_putc(READY_CODE); // Tells opponent that player is ready
     }
-    if (ir_uart_read_ready_p () && !opponent_ready) {
+    if (ir_uart_read_ready_p() && !opponent_ready) {
         // If recieved ir input and opponent is not ready, check if input is valid
         // then update message state to reflect opponent status
         uint8_t in;
@@ -48,17 +48,13 @@ void game_over(int state)
     opponent_ready = false;
     bool restart = false;
 
-    if (state == 0)
-    {
+    if (state == 0) {
         ir_uart_putc(OVER_CODE);
         tinygl_text (LOSE_TEXT);
-    }
-    else if (state == 1)
-    {
+    } else if (state == 1) {
         tinygl_text (WIN_TEXT);
     }
-    while(!restart)
-    {
+    while(!restart) {
         pacer_wait ();
         tinygl_update ();
         restart = play_again ();
