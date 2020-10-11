@@ -36,7 +36,7 @@ void ready_up(void)
 
         button_update ();
 
-        if (button_update() && !ready) {
+        if (button_down_p(0) && !ready) {
             tinygl_clear();
             //if player readies up and isnt already ready, change state to reflect that
             ready = true;

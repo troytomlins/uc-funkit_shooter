@@ -24,7 +24,7 @@ static bool opponent_ready;
 static bool play_again(void)
 {
     button_update();
-    if (button_update() && !ready) {
+    if (button_down_p(0) && !ready) {
         //if player readies up and isnt already ready, change state to reflect that
         ready = true;
         tinygl_text(READY_TEXT);
