@@ -37,6 +37,7 @@ void ready_up(void)
         navswitch_update ();
 
         if (navswitch_push_event_p (NAVSWITCH_PUSH) && !ready) {
+            tinygl_clear();
             //if player readies up and isnt already ready, change state to reflect that
             ready = true;
             tinygl_text(READY_TEXT);
@@ -44,6 +45,7 @@ void ready_up(void)
         }
 
         if (ir_uart_read_ready_p () && !opponent_ready) {
+            tinygl_clear();
             // If recieved ir input and opponent is not ready, check if input is valid
             // then update message state to reflect opponent status
             uint8_t in;
