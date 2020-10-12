@@ -41,30 +41,19 @@ void draw_shoot_beam(void)
     Required because players are opposite one another and their funkits are mirrored */
 static int8_t mirror_shot(int8_t shot)
 {
-    switch(shot) {
-    case 0:
-        return 4;
-    case 1:
-        return 3;
-    case 2:
-        return 2;
-    case 3:
-        return 1;
-    }
-    // case 4:
-    return 0;
+     return(4-shot);
 }
 
 /** Instantiates a shot */
 void start_shot(int8_t shot)
 {
     if (shot_ready) {
+		ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
         shot_col = shot; // Sets shot column
         shot_on = true;
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN; // Sets visual cooldown
         shot_cd = SHOT_COOLDOWN; // Sets shot cooldown
-        ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
     }
 }
 

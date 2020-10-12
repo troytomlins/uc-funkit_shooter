@@ -10,7 +10,7 @@
 #include "tinygl.h"
 
 /* Defines cooldown times */
-#define SHOT_COOLDOWN 30
+#define SHOT_COOLDOWN 80
 #define VISUAL_COOLDOWN 10
 // inits the shots module
 void init_shots(void);
