@@ -8,8 +8,8 @@
 #define GAMEOVER_H
 
 /* Message Rates and Text */
-#define WIN_TEXT " YOU WIN"
-#define LOSE_TEXT " YOU LOSE"
+#define WIN_TEXT " YOU WIN  PRESS TO REPLAY"
+#define LOSE_TEXT " YOU LOSE  PRESS TO REPLAY"
 
 /* Game over code */
 #define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
