@@ -17,6 +17,8 @@ typedef struct {
     int move_tick;
     bool active;
 } shell_t;
+// inits shells by deactivating all of them
+void init_shells(void);
 
 // creates a shell
 void create_shell(int8_t x);

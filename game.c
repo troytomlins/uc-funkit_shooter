@@ -19,6 +19,7 @@
 #include "gameover.h"
 #include "game.h"
 #include "lives.h"
+#include "shells.h"
 
 /** cleans an ir input to make sure it is valid (prevents invalid ir inputs)
     a safety precaution against crashes. */
