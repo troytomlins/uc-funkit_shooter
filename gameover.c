@@ -3,17 +3,17 @@
     @date   8th Oct
     @brief  ends game
 */
-
+#include "system.h"
 #include "button.h"
 #include "tinygl.h"
 #include "pacer.h"
 #include "../fonts/font3x5_1.h"
 #include "ir_uart.h"
+
 #include "gameover.h"
 #include "game.h"
 #include "readyup.h"
 #include "lives.h"
-#include "system.h"
 
 static bool ready;
 static bool opponent_ready;

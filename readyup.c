@@ -8,8 +8,9 @@
 #include "pacer.h"
 #include "../fonts/font3x5_1.h"
 #include "ir_uart.h"
-#include "readyup.h"
 #include "button.h"
+
+#include "readyup.h"
 
 
 /** displays and waits until players are ready before allowing game to proceed */

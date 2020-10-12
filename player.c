@@ -7,6 +7,7 @@
 
 #include "tinygl.h"
 #include "navswitch.h"
+
 #include "shoot.h"
 #include "player.h"
 

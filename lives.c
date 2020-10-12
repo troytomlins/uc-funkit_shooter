@@ -4,11 +4,11 @@
     @brief  Lives Module
 */
 #include "led.h"
-#include "gameover.h"
 #include "tinygl.h"
+
+#include "gameover.h"
 #include "lives.h"
 #include "player.h"
-#include <stdio.h>
 
 static int lives;
 static bool flash_aid;

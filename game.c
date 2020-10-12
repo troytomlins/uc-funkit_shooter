@@ -8,18 +8,22 @@
 #include "system.h"
 #include "tinygl.h"
 #include "ir_uart.h"
-#include "shoot.h"
-#include "player.h"
 #include "task.h"
 #include "navswitch.h"
-#include "shells.h"
 #include "led.h"
+
 #include "readyup.h"
 #include "button.h"
 #include "gameover.h"
 #include "game.h"
 #include "lives.h"
 #include "shells.h"
+#include "shoot.h"
+#include "player.h"
+#include "shells.h"
+
+
+
 
 /** cleans an ir input to make sure it is valid (prevents invalid ir inputs)
     a safety precaution against crashes. */
