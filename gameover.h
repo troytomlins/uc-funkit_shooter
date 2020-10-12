@@ -8,7 +8,7 @@
 #define GAMEOVER_H
 
 /* Message Rates and Text */
-#define MESSAGE_RATE 30
+#define MESSAGE_RATE 50
 #define PACER_RATE 200
 #define WIN_TEXT "  YOU WIN  PRESS TO PLAY AGAIN"
 #define LOSE_TEXT "  YOU LOSE  PRESS TO PLAY AGAIN"
