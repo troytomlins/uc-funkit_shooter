@@ -36,18 +36,23 @@ static bool clean_ir(int8_t in)
     }
 }
 
+// initialises all game objects
+static void init_game_objects(void){
+	init_player();
+    init_lives();
+    init_shots();
+    init_shells();
+}
+
 /** Initializes all the systems needed for the game */
 void game_init(void)
 {
     system_init ();
     navswitch_init();
-    tinygl_init(DISPLAY_RATE);
-    ir_uart_init();
+    tinygl_init(DISPLAY_RATE); //includes display_init()
+    ir_uart_init(); //includes timer0_init
     button_init();
-    init_player();
-    set_lives(); // Sets default number of lives
-    init_shots();
-    init_shells();
+    init_game_objects();
 }
 
 

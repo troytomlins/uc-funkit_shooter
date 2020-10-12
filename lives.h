@@ -17,7 +17,7 @@ void show_lives(void);
 void check_hit(uint8_t shell_pos);
 
 // Returns lives remaining
-int get_lives(void);
+int init_lives(void);
 
 // Sets lives to default
 void set_lives(void);

@@ -38,7 +38,7 @@ void show_lives(void)
 }
 
 /** Returns number of lives remaining */
-int get_lives(void){
+int init_lives(void){
 	return lives;
 }
 
