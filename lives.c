@@ -44,7 +44,7 @@ uint8_t get_lives(void)
 }
 
 /** Checks if shell_hits player and updates lives */
-void check_hit(uint8_t shell_pos)
+void check_hit(int8_t shell_pos)
 {
     tinygl_point_t player_pos = get_player_pos();
     if (player_pos.x==shell_pos) {

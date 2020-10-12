@@ -20,7 +20,7 @@ void init_player(void)
 }
 
 /** Updates Player's location by changing its x position*/
-static void move_player(int inc)
+static void move_player(int8_t inc)
 {
     // changes player x position by inc
     // un-draws player prior to moving

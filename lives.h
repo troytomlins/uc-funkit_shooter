@@ -14,7 +14,7 @@
 void show_lives(void);
 
 // Checks if player is hit
-void check_hit(uint8_t shell_pos);
+void check_hit(int8_t shell_pos);
 
 // Returns lives remaining
 void init_lives(void);

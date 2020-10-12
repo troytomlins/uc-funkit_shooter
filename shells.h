@@ -14,7 +14,7 @@
 /** define custom object type "shell" */
 typedef struct {
     tinygl_point_t pos;
-    int move_tick;
+    uint8_t move_tick;
     bool active;
 } shell_t;
 // inits shells by deactivating all of them

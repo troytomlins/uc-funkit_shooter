@@ -39,7 +39,7 @@ void draw_shoot_beam(void)
 
 /** Mirrors a shot on the x axis.
     Required because players are opposite one another and their funkits are mirrored */
-static int8_t mirror_shot(uint8_t shot)
+static int8_t mirror_shot(int8_t shot)
 {
     switch(shot) {
     case 0:

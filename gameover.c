@@ -15,6 +15,7 @@
 #include "readyup.h"
 #include "lives.h"
 
+
 static bool ready;
 static bool opponent_ready;
 
@@ -49,7 +50,7 @@ static bool play_again(void)
  * Displays if you won or lost  then asks if you want to play again.
  * If players play again, clears tinygl and resets lives.
  */
-void game_over(int state)
+void game_over(uint8_t state)
 {
 	tinygl_clear();
 	init_game_objects(); // Re sets lives to default

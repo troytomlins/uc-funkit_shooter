@@ -23,8 +23,6 @@
 #include "shells.h"
 
 
-
-
 /** cleans an ir input to make sure it is valid (prevents invalid ir inputs)
     a safety precaution against crashes. */
 static bool clean_ir(int8_t in)
@@ -64,7 +62,7 @@ static void process_input(__unused__ void *data)
 
     // Checks for incoming shot from opponent
     if (ir_uart_read_ready_p()) {
-        uint8_t incoming = ir_uart_getc();
+        int8_t incoming = ir_uart_getc();
         if (incoming==OVER_CODE) { // Game over win
             game_over(1); // 1 indictates win
         } else if(clean_ir(incoming)) { // incoming shot
