@@ -37,7 +37,7 @@ static bool clean_ir(int8_t in)
 }
 
 // initialises all game objects
-static void init_game_objects(void)
+void init_game_objects(void)
 {
     init_player();
     init_lives();

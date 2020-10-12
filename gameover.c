@@ -52,6 +52,8 @@ static bool play_again(void)
 void game_over(int state)
 {
 	tinygl_clear();
+	init_game_objects(); // Re sets lives to default
+	tinygl_update();
     ready = false;
     opponent_ready = false;
     bool restart = false;
@@ -67,6 +69,6 @@ void game_over(int state)
         tinygl_update ();
         restart = play_again (); // Returns bool if players want to play again
     }
-    tinygl_clear(); // Clears tinygl
-    game_init(); // Re sets lives to default
+	tinygl_clear();
+	tinygl_update();
 }
