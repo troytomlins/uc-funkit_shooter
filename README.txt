@@ -10,7 +10,9 @@ Setting up:
 
 Moving the player:
  - Your player is at the bottom of the screen. Use the navstick to move it left and right.
-
+ - You can loop around from the far right to the left. Eg if you move off the screen on the left, 
+	you will re-appear on the right
+	
 Attacking:
  - Press down on the navstick to shoot at your opponent.
  - A shooting beam will appear on your screen, sending a bullet towards your enemy on their screen.
