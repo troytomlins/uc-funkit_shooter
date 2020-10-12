@@ -51,8 +51,6 @@ void check_hit(uint8_t shell_pos)
         if (!(lives==1)) { // checks if lives are remaining
             lives--;
         } else {
-			tinygl_clear();
-			tinygl_update();
             game_over(0); // 0 indictates loss
         }
     }
