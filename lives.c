@@ -10,7 +10,7 @@
 #include "lives.h"
 #include "player.h"
 
-static int lives;
+static uint8_t lives;
 static bool flash_aid;
 static uint8_t flash_ticks;
 
@@ -38,7 +38,7 @@ void show_lives(void)
 }
 
 /** Returns number of lives remaining */
-int get_lives(void)
+uint8_t get_lives(void)
 {
     return lives;
 }

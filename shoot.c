@@ -9,8 +9,8 @@
 #include "ir_uart.h"
 #include "shoot.h"
 
-static int shot_dis; // Shot display timer
-static int shot_cd;
+static uint8_t shot_dis; // Shot display timer
+static uint8_t shot_cd;
 static bool shot_on; // States whether shot is on screen
 static bool shot_ready; // States if player can shoot
 static int8_t shot_col; // Shot column

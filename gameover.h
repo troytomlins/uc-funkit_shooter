@@ -16,6 +16,6 @@
 
 
 // Stops game and displays game over
-void game_over(int state);
+void game_over(uint8_t state);
 
 #endif
