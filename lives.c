@@ -38,7 +38,7 @@ void show_lives(void)
 }
 
 /** Returns number of lives remaining */
-int init_lives(void)
+int get_lives(void)
 {
     return lives;
 }
@@ -56,8 +56,8 @@ void check_hit(uint8_t shell_pos)
     }
 }
 
-/** Sets lives to default number */
-void set_lives(void)
+/** Inits lives to default number */
+void init_lives(void)
 {
     lives = LIVES_NUM;
     flash_aid = false;
