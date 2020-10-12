@@ -51,6 +51,7 @@ static bool play_again(void)
  */
 void game_over(int state)
 {
+	tinygl_clear();
     ready = false;
     opponent_ready = false;
     bool restart = false;
