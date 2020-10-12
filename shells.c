@@ -42,7 +42,7 @@ static void deactivate_shell(shell_t* shell)
 /** draws all shells */
 void draw_shells(void)
 {
-	uint8_t i;
+    uint8_t i;
     //cycle through shells, drawing each one
     for(i=0; i<MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
@@ -56,7 +56,7 @@ void draw_shells(void)
 /** Moves all active shells and deactivates shells if they go off the ledmat */
 void move_shells(void)
 {
-	uint8_t i;
+    uint8_t i;
     // Cycle through shells, moving each one
     for(i=0; i<MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
@@ -76,12 +76,13 @@ void move_shells(void)
 }
 
 // inits shells by ensuring all shells are deactivated
-void init_shells(void){
-	uint8_t i;
-	for(i=0 ; i<MAX_SHELLS; i++){
-		shell_t* shell = &(shells[i]);
-		deactivate_shell(shell);
-	}
+void init_shells(void)
+{
+    uint8_t i;
+    for(i=0 ; i<MAX_SHELLS; i++) {
+        shell_t* shell = &(shells[i]);
+        deactivate_shell(shell);
+    }
 }
 
 

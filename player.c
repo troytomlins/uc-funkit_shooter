@@ -13,9 +13,10 @@
 
 static player_t player; // Default player start pos
 
-void init_player(void){
-	tinygl_point_t start = PLAYER_START_POS;
-	player.pos = start;
+void init_player(void)
+{
+    tinygl_point_t start = PLAYER_START_POS;
+    player.pos = start;
 }
 
 /** Updates Player's location by changing its x position*/

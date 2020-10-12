@@ -15,11 +15,12 @@ static bool shot_on; // States whether shot is on screen
 static bool shot_ready; // States if player can shoot
 static int8_t shot_col; // Shot column
 
-void init_shots(void){
-	shot_dis = 0;
-	shot_cd = 0;
-	shot_on = false;
-	shot_ready = true;
+void init_shots(void)
+{
+    shot_dis = 0;
+    shot_cd = 0;
+    shot_on = false;
+    shot_ready = true;
 }
 
 /** Draws the shoot beam */
@@ -38,16 +39,17 @@ void draw_shoot_beam(void)
 
 /** Mirrors a shot on the x axis.
     Required because players are opposite one another and their funkits are mirrored */
-static int8_t mirror_shot(uint8_t shot){
-    switch(shot){
-        case 0:
-            return 4;
-        case 1:
-            return 3;
-        case 2:
-            return 2;
-        case 3:
-            return 1;
+static int8_t mirror_shot(uint8_t shot)
+{
+    switch(shot) {
+    case 0:
+        return 4;
+    case 1:
+        return 3;
+    case 2:
+        return 2;
+    case 3:
+        return 1;
     }
     // case 4:
     return 0;
@@ -75,7 +77,7 @@ void update_shoot_beam(void)
     }
 
     // checks if gun has been reloaded
-    if(shot_cd == 0){
+    if(shot_cd == 0) {
         shot_ready = true;
     }
 

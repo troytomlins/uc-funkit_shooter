@@ -23,7 +23,7 @@ void show_lives(void)
     if (lives==2) { // LED Flashes
         flash_ticks++;
         if(flash_ticks == FLASH_TICKS) {
-			flash_ticks = 0;
+            flash_ticks = 0;
             if(flash_aid) {
                 led_set (LED1, 1);
             } else {
@@ -38,8 +38,9 @@ void show_lives(void)
 }
 
 /** Returns number of lives remaining */
-int init_lives(void){
-	return lives;
+int init_lives(void)
+{
+    return lives;
 }
 
 /** Checks if shell_hits player and updates lives */
