@@ -80,7 +80,7 @@ player.o: player.c player.h shoot.h ../../drivers/navswitch.h ../../utils/tinygl
 shoot.o: shoot.c shoot.h ../../utils/tinygl.h ../../drivers/avr/ir_uart.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-gameover.o: gameover.c gameover.h
+gameover.o: gameover.c gameover.h game.h
 	$(CC) -c $(CFLAGS) $< -o $@
 	
 lives.o: lives.c lives.h gameover.h ../../utils/tinygl.h player.h ../../drivers/led.h

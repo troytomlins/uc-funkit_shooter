@@ -32,7 +32,7 @@ static bool clean_ir(int8_t in)
 }
 
 /** Initializes all the systems needed for the game */
-static void game_init(void)
+void game_init(void)
 {
     system_init ();
     navswitch_init();
