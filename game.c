@@ -39,7 +39,7 @@ static void game_init(void)
     tinygl_init(DISPLAY_RATE);
     ir_uart_init();
     button_init();
-    init_player()
+    init_player();
     set_lives(); // Sets default number of lives
     init_shots();
 }

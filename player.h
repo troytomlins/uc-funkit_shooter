@@ -17,7 +17,7 @@ typedef struct {
 } player_t;
 
 // places player at player start position
-void init_player(void)
+void init_player(void);
 
 // processes any navswitch inputs
 void take_input(void);
