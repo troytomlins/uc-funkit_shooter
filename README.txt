@@ -41,3 +41,13 @@ CODE INFORMATION
 
  - You can skip the readyup phase by holding the non-resetting button down while loading the game
 	Note that by skipping the readyup phase, an opponent may not be able to complete the ready phase if they haven't skipped
+
+MODULES INFO
+game: contains the tasks scheduler and is in charge of calling functions from the other modules to run the game
+gameover: contains implementations for the gameover screen that runs when a player loses. Also prompts for a restart of the game
+lives: keeps track of the player's lives
+player: keeps track of the player and processes player inputs
+readyup: is ran when the game is loaded. Prompts for players to readyup before main game begins
+shells: contains the shells that move towards the player and the functions that manipuate the shells
+shoot: contains implementation of the shooting beam 
+

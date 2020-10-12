@@ -42,6 +42,7 @@ void game_init(void)
     init_player();
     set_lives(); // Sets default number of lives
     init_shots();
+    init_shells();
 }
 
 

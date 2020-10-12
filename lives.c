@@ -1,7 +1,7 @@
 /** @file   lives.c
     @authors Troy Tomlins, William Chen
     @date   11th Oct
-    @brief  Lives Modulo
+    @brief  Lives Module
 */
 #include "led.h"
 #include "gameover.h"

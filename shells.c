@@ -10,6 +10,15 @@
 
 static shell_t shells[MAX_SHELLS];
 
+// inits shells by ensuring all shells are deactivated
+void init_shells(void){
+	uint8_t i;
+	for(i=0;i<MAX_SHELLS,i++){
+		shell_t* shell = &(shells[i]);
+		deactivate_shell(shell);
+	}
+}
+
 /** Creates a shell at x coord line */
 void create_shell(int8_t x)
 {
