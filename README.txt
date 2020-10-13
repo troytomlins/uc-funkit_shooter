@@ -1,12 +1,9 @@
-TODO:  (P = Priority, E = Extra)
-E- include how many lives were remaining for the winner
-E- Tweak fire rate and shell movement to make game more interesting
-
 Setting up:
  - When you start up the game, text will scroll prompting you to begin. Both player must be ready before the game begins
  - Sit opposite your opponent. Both player then set their funkits side by side so that each player's navsticks are on their right. 
  - Doing so should also align the ir emmiters and recievers. 
  - To ready up, each player should press on the non-resetting button
+ - The first person to ready up becomes player 1
 
 Moving the player:
  - Your player is at the bottom of the screen. Use the navstick to move it left and right.
@@ -30,6 +27,7 @@ Lives:
 
 Game Over:
  - When the game is over, text will scroll telling you if you won or lost and ask if you want to play again.
+ - The winner will have their score displayed. Their score is equal to how many extra lives they had.
  - Once both players press ready the game will restart.
 
 
@@ -50,4 +48,5 @@ player: keeps track of the player and processes player inputs
 readyup: is ran when the game is loaded. Prompts for players to readyup before main game begins
 shells: contains the shells that move towards the player and the functions that manipuate the shells
 shoot: contains implementation of the shooting beam 
+messenger: contains a rather complicated module for sending and recieving information. 
 

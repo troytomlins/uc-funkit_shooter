@@ -5,7 +5,6 @@
 */
 
 #include "tinygl.h"
-
 #include "shells.h"
 #include "lives.h"
 
@@ -44,7 +43,7 @@ void draw_shells(void)
 {
     uint8_t i;
     //cycle through shells, drawing each one
-    for(i=0; i<MAX_SHELLS; i++) {
+    for(i=0; i < MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
         //only draw if shell is active
         if(shell->active) {
@@ -58,7 +57,7 @@ void move_shells(void)
 {
     uint8_t i;
     // Cycle through shells, moving each one
-    for(i=0; i<MAX_SHELLS; i++) {
+    for(i=0; i < MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
         tinygl_draw_point(shell->pos, 0);
         // If the shell is active and TICK_THRESHOLD has been reached, move the shell
@@ -79,7 +78,7 @@ void move_shells(void)
 void init_shells(void)
 {
     uint8_t i;
-    for(i=0 ; i<MAX_SHELLS; i++) {
+    for(i=0 ; i < MAX_SHELLS; i++) {
         shell_t* shell = &(shells[i]);
         deactivate_shell(shell);
     }

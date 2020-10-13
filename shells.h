@@ -17,16 +17,18 @@ typedef struct {
     uint8_t move_tick;
     bool active;
 } shell_t;
+
 // inits shells by deactivating all of them
 void init_shells(void);
 
-// creates a shell
+// creates a shell at x coordinate
 void create_shell(int8_t x);
 
 // draws_shells
 void draw_shells(void);
 
-// move_shells and deactivates if they go off the ledmat
+// move_shells and deactivates them if they go off the ledmat.
+// if they go off the ledmat, it also checks to see if they hit the player
 void move_shells(void);
 
 

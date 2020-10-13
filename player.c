@@ -13,6 +13,7 @@
 
 static player_t player; // Default player start pos
 
+// inits player by setting it to the start position
 void init_player(void)
 {
     tinygl_point_t start = PLAYER_START_POS;
@@ -28,8 +29,9 @@ static void move_player(int8_t inc)
     tinygl_draw_point(player.pos, 0);
 
     // note that an extra 5 is added to pos.x to ensure it is positive
-    // pos.x is also a signed int, so it can be momentarily negative
-    player.pos.x = (player.pos.x + inc + 5) % 5;
+    // after modulo-ing it. This also allows the player to jump from the 
+    // far left to the far right by "moving off" the ledmat
+    player.pos.x = (player.pos.x + 5+ inc) % 5;
 }
 
 /** Returns player position */
@@ -42,7 +44,8 @@ tinygl_point_t get_player_pos(void)
 void take_input(void)
 {
     navswitch_update();
-    // Checks position change, then changes player by the direction moved
+    // Checks position change, then changes player by the direction moved.
+    // Or shoots if the navstick is pushed
     if (navswitch_push_event_p (NAVSWITCH_EAST)) {
         move_player(1);
     } else if (navswitch_push_event_p(NAVSWITCH_WEST)) {

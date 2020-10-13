@@ -6,7 +6,6 @@
 */
 
 #include "tinygl.h"
-#include "ir_uart.h"
 #include "shoot.h"
 #include "messenger.h"
 
@@ -50,7 +49,7 @@ void start_shot(int8_t shot)
 {
     if (shot_ready) {
         shot_col = shot; // Sets shot column
-		add_message(mirror_shot(shot_col)); // Sends to other player
+		add_message(mirror_shot(shot_col)); // Sends to other player using messenger module
         shot_on = true;
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN; // Sets visual cooldown
@@ -61,23 +60,14 @@ void start_shot(int8_t shot)
 /** Updates the shoot_beam information */
 void update_shoot_beam(void)
 {
-    // Checks if shot needs removed from screen
-    if (shot_dis == 0) {
+	// decrements shot_dis and shot_cd and checks if they've hit 0
+	// then turns the shot beam off or reloads.
+    
+    if (shot_dis-- == 0) {
         shot_on = false;
     }
 
-    // checks if gun has been reloaded
-    if(shot_cd == 0) {
+    if(shot_cd-- == 0) {
         shot_ready = true;
-    }
-
-    // Checks if shot is still being displayed
-    if (shot_dis > 0) {
-        shot_dis--;
-    }
-
-    // Lowers shot cooldown
-    if (shot_cd > 0) {
-        shot_cd--;
     }
 }

@@ -1,7 +1,7 @@
 /** @file   lives.c
     @authors Troy Tomlins, William Chen
     @date   11th Oct
-    @brief  Lives Module
+    @brief  Lives Module. Stores, manipulates, and displays lives
 */
 #include "led.h"
 #include "tinygl.h"
@@ -11,28 +11,29 @@
 #include "player.h"
 
 static uint8_t lives;
-static bool flash_aid;
+static bool flash_on;
 static uint8_t flash_ticks;
 
 /** Show number of lives */
 void show_lives(void)
 {
-    if (lives==3) { // LED Permanently on
+    if (lives==3) { // LED always on
         led_set (LED1, 1);
     }
     if (lives==2) { // LED Flashes
-        flash_ticks++;
-        if(flash_ticks == FLASH_TICKS) {
+		
+        // after FLASH_TICKS amount of game ticks, toggle led
+        if(flash_ticks++ == FLASH_TICKS) {
             flash_ticks = 0;
-            if(flash_aid) {
+            if(flash_on) {
                 led_set (LED1, 1);
             } else {
                 led_set (LED1, 0);
             }
-            flash_aid = !flash_aid;
+            flash_on = !flash_on;
         }
     }
-    if (lives==1) { // LED Permanently off
+    if (lives==1) { // LED always off
         led_set (LED1, 0);
     }
 }
@@ -47,11 +48,10 @@ uint8_t get_lives(void)
 void check_hit(int8_t shell_pos)
 {
     tinygl_point_t player_pos = get_player_pos();
-    if (player_pos.x==shell_pos) {
-        if (!(lives==1)) { // checks if lives are remaining
-            lives--;
-        } else {
-            game_over(0); // 0 indictates loss
+    if (player_pos.x == shell_pos) {
+		lives--;
+        if (lives == 0) { // reduce lives FIRST, then check if player is out of lives
+            game_over(0); // input 0 indictates loss
         }
     }
 }
@@ -60,6 +60,6 @@ void check_hit(int8_t shell_pos)
 void init_lives(void)
 {
     lives = LIVES_NUM;
-    flash_aid = false;
+    flash_on = false;
     flash_ticks = 0;
 }

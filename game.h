@@ -11,12 +11,13 @@
 #define INPUT_RATE 100
 #define DISPLAY_RATE 500
 #define IR_RATE 100
+
 // initialises the game system
 void game_init(void);
 
 // inits only the game_objects
 void init_game_objects(void);
 
-
+// restarts the task scheduler
 void re_schedule(void);
 #endif

@@ -1,7 +1,8 @@
-/** @file   player.c
+/** @file   game.c
     @authors Troy Tomlins, William Chen
     @date   8th Oct
-    @brief  Core game module. Responsible for initialising the game, and starting the
+    @brief  Core game module. Responsible for initialising the game, 
+    declaring and starting the
     tasks scheduler.
 */
 
@@ -10,10 +11,9 @@
 #include "ir_uart.h"
 #include "task.h"
 #include "navswitch.h"
-#include "led.h"
+#include "button.h"
 
 #include "readyup.h"
-#include "button.h"
 #include "gameover.h"
 #include "game.h"
 #include "lives.h"
@@ -21,12 +21,13 @@
 #include "shoot.h"
 #include "player.h"
 #include "shells.h"
-
 #include "messenger.h"
 
 
 
-// initialises all game objects
+// initialises all game objects except the messenger
+// the messenger is initialised by readyup due to needing to know who
+// player1 is
 void init_game_objects(void)
 {
     init_player();
@@ -53,6 +54,7 @@ static void process_input(__unused__ void *data)
 {
     take_input(); // processes any player input
 }
+
 /** Updates the game information */
 static void update_game(__unused__ void *data)
 {
@@ -71,7 +73,7 @@ static void update_display(__unused__ void *data)
 }
 
 
-/** Updates display to match game information */
+/** Does an ir task, either send or receive */
 static void ir_task(__unused__ void *data)
 {
     do_messages();
@@ -99,7 +101,6 @@ void re_schedule(void)
     };
 
     task_schedule (tasks, ARRAY_SIZE (tasks));
-
 }
 
 /** Main function of game */

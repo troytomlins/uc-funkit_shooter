@@ -13,7 +13,6 @@
 
 /* Game over code */
 #define SAFETY_WAIT_LOOPS 5
-#define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
 
 
 // Stops game and displays game over
