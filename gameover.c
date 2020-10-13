@@ -3,12 +3,15 @@
     @date   8th Oct
     @brief  ends game
 */
+#include <string.h>
+
 #include "system.h"
 #include "button.h"
 #include "tinygl.h"
 #include "pacer.h"
 #include "../fonts/font3x5_1.h"
 #include "ir_uart.h"
+#include "uint8toa.h"
 
 #include "gameover.h"
 #include "game.h"
@@ -83,7 +86,19 @@ void game_over(uint8_t state)
         }
         ir_uart_putc(OVER_CODE); // Tells winner that game is over
     } else if (state == 1) {
-        tinygl_text (WIN_TEXT); // we're the winner so display it
+		char buffer[15];
+        char *str = buffer;
+
+        strcpy (str, WIN_TEXT);
+        while (*str) {
+            str++;
+        }
+        uint8toa (get_lives(), str, 0);
+        while (*str) {
+            str++;
+        }
+        tinygl_clear ();
+        tinygl_text (buffer);
     }
 
     while(!restart) {

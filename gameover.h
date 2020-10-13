@@ -8,8 +8,8 @@
 #define GAMEOVER_H
 
 /* Message Rates and Text */
-#define WIN_TEXT " YOU WIN  PRESS TO REPLAY"
-#define LOSE_TEXT " YOU LOSE  PRESS TO REPLAY"
+#define WIN_TEXT " YOU WON BY "
+#define LOSE_TEXT " YOU LOSE"
 
 /* Game over code */
 #define SAFETY_WAIT_LOOPS 5

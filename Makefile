@@ -85,12 +85,16 @@ shoot.o: shoot.c shoot.h ../../utils/tinygl.h ../../drivers/avr/ir_uart.h
 
 gameover.o: gameover.c gameover.h game.h
 	$(CC) -c $(CFLAGS) $< -o $@
+
 	
 lives.o: lives.c lives.h gameover.h ../../utils/tinygl.h player.h ../../drivers/led.h
 	$(CC) -c $(CFLAGS) $< -o $@
+	
+uint8toa.o: ../../utils/uint8toa.c ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o navswitch.o readyup.o lives.o pio.o button.o ledmat.o messenger.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o gameover.o
+game.out: game.o system.o navswitch.o readyup.o lives.o pio.o button.o ledmat.o messenger.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o gameover.o uint8toa.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

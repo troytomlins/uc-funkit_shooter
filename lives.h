@@ -22,4 +22,6 @@ void init_lives(void);
 // Sets lives to default
 void set_lives(void);
 
+uint8_t get_lives(void);
+
 #endif
