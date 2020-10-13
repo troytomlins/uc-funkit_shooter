@@ -8,9 +8,9 @@
 
 /* Define polling rates for game tasks in Hz.  */
 #define GAME_TICK_RATE 200
-#define INPUT_RATE 100
-#define DISPLAY_RATE 500
-#define IR_RATE 100
+#define INPUT_RATE 200
+#define DISPLAY_RATE 600
+#define IR_RATE 200
 
 // initialises the game system
 void game_init(void);
