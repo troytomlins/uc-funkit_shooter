@@ -8,6 +8,7 @@
 #include "tinygl.h"
 #include "ir_uart.h"
 #include "shoot.h"
+#include "messenger.h"
 
 static uint8_t shot_dis; // Shot display timer
 static uint8_t shot_cd;
@@ -49,7 +50,7 @@ void start_shot(int8_t shot)
 {
     if (shot_ready) {
         shot_col = shot; // Sets shot column
-		ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
+		add_message(mirror_shot(shot_col)); // Sends to other player
         shot_on = true;
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN; // Sets visual cooldown

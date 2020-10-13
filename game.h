@@ -10,8 +10,7 @@
 #define GAME_TICK_RATE 200
 #define INPUT_RATE 100
 #define DISPLAY_RATE 500
-#define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
-
+#define IR_RATE 100
 // initialises the game system
 void game_init(void);
 

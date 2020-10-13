@@ -13,9 +13,12 @@
 
 /* Game over code */
 #define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
-
+#define CONFIRM_OVER 122
+void set_opponent_ready(void);
 
 // Stops game and displays game over
 void game_over(uint8_t state);
+
+void confirm_gameover(void);
 
 #endif

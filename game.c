@@ -22,17 +22,9 @@
 #include "player.h"
 #include "shells.h"
 
+#include "messenger.h"
 
-/** cleans an ir input to make sure it is valid (prevents invalid ir inputs)
-    a safety precaution against crashes. */
-static bool clean_ir(int8_t in)
-{
-    if(in >= 0 && in <= 4) {
-        return true;
-    } else {
-        return false;
-    }
-}
+
 
 // initialises all game objects
 void init_game_objects(void)
@@ -51,6 +43,7 @@ void game_init(void)
     tinygl_init(DISPLAY_RATE); //includes display_init()
     ir_uart_init(); //includes timer0_init
     button_init();
+   
     init_game_objects();
 }
 
@@ -59,17 +52,6 @@ void game_init(void)
 static void process_input(__unused__ void *data)
 {
     take_input(); // processes any player input
-
-    // Checks for incoming shot from opponent
-    if (ir_uart_read_ready_p()) {
-        int8_t incoming = ir_uart_getc();
-        if (incoming==OVER_CODE) { // Game over win
-            game_over(1); // 1 indictates win
-        } else if(clean_ir(incoming)) { // incoming shot
-            // only create the shell if the shot is valid
-            create_shell(incoming);
-        }
-    }
 }
 /** Updates the game information */
 static void update_game(__unused__ void *data)
@@ -85,8 +67,16 @@ static void update_display(__unused__ void *data)
     draw_shells();
     draw_player();
     tinygl_update();
-    show_lives();
+    //show_lives();
 }
+
+
+/** Updates display to match game information */
+static void ir_task(__unused__ void *data)
+{
+	do_messages();
+}
+
 
 /** Main function of game */
 int main (void)
@@ -101,6 +91,10 @@ int main (void)
     task_t tasks[] = {
         {
             .func = process_input, .period = TASK_RATE / INPUT_RATE,
+            .data = 0
+        },
+		{
+            .func = ir_task, .period = TASK_RATE / IR_RATE,
             .data = 0
         },
         {

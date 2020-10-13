@@ -11,7 +11,10 @@
 #include "button.h"
 
 #include "readyup.h"
+#include "messenger.h"
 
+static bool ready;
+static bool opponent_ready;
 
 /** displays and waits until players are ready before allowing game to proceed */
 void ready_up(void)
@@ -27,8 +30,8 @@ void ready_up(void)
     pacer_init (PACER_RATE);
 
     // waits for both player and opponent to be ready
-    bool ready = false;
-    bool opponent_ready = false;
+    ready = false;
+    opponent_ready = false;
     while(!(ready && opponent_ready)) {
         // note that while waiting for player to be ready,
         // opponent can ready up first
@@ -41,6 +44,11 @@ void ready_up(void)
             tinygl_clear();
             //if player readies up and isnt already ready, change state to reflect that
             ready = true;
+            if(!opponent_ready){
+				init_messenger(true);
+			} else {
+				init_messenger(false);
+			}
             tinygl_text(READY_TEXT);
             ir_uart_putc(READY_CODE); // Tells opponent that player is ready
         }

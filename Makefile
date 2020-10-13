@@ -23,6 +23,9 @@ game.o: game.c game.h ../../drivers/avr/system.h ../../utils/tinygl.h ../../driv
 shells.o: shells.c ../../utils/tinygl.h shells.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+messenger.o: messenger.c ../../utils/tinygl.h messenger.h ../../drivers/avr/ir_uart.h shells.h gameover.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 button.o: ../../drivers/button.c ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
@@ -87,7 +90,7 @@ lives.o: lives.c lives.h gameover.h ../../utils/tinygl.h player.h ../../drivers/
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o navswitch.o readyup.o lives.o pio.o button.o ledmat.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o gameover.o
+game.out: game.o system.o navswitch.o readyup.o lives.o pio.o button.o ledmat.o messenger.o pacer.o timer.o tinygl.o display.o font.o ir_uart.o timer0.o usart1.o prescale.o led.o task.o shells.o player.o shoot.o gameover.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
