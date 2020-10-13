@@ -48,8 +48,8 @@ static int8_t mirror_shot(int8_t shot)
 void start_shot(int8_t shot)
 {
     if (shot_ready) {
-		ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
         shot_col = shot; // Sets shot column
+		ir_uart_putc(mirror_shot(shot_col)); // Sends to other player
         shot_on = true;
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN; // Sets visual cooldown
