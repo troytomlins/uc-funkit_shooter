@@ -21,32 +21,35 @@ struct mess_body {
     bool active;
 };
 
-static message_t* head;
-static message_t* tail;
-static message_t message_pool[MAX_MESSAGE_QUEUE];
-static bool sender;
-static bool player1;
+static message_t* head; //head for a linked list
+static message_t* tail; //tail for a linked list
+static message_t message_pool[MAX_MESSAGE_QUEUE]; // array for storing messages to be sent
+static bool sender; // bool for if it's this funkit's turn to send message
+static bool player1; //bool for if this is player 1
 
-void reset_messenger(void)
-{
-	init_messenger(false);
+bool get_sender(void){
+	return(sender);
 }
 
+// inits the messenger as player 1 (or 2 if not player 1)
 void init_messenger(bool is_player1)
 {
     head = NULL;
     tail = NULL;
-	player1 = is_player1;
+    player1 = is_player1;
     sender = is_player1;
 }
 
+// adds a message to the list of to-send messages. Adds a buffer value if this is player 1
 void add_message(int8_t message)
 {
     uint8_t i;
     message_t* new;
     bool added = false;
     for(i=0; i<MAX_MESSAGE_QUEUE; i++) {
+        // searches for a non-active message
         if(!message_pool[i].active && !added) {
+            // places message value into the available slot and links to the linked list
             new = &message_pool[i];
             if(player1) {
                 new->message = message + ENCRYPTION_ADD;
@@ -69,6 +72,7 @@ void add_message(int8_t message)
 
 }
 
+// takes the head of the list and sends it
 void send_message(void)
 {
     int8_t message;
@@ -82,11 +86,7 @@ void send_message(void)
             head = NULL;
         }
     } else {
-        if(player1) {
-            ir_uart_putc(BLANK + ENCRYPTION_ADD);
-        } else {
-            ir_uart_putc(BLANK);
-        }
+        ir_uart_putc(BLANK);
     }
     sender = !sender;
 }
@@ -95,7 +95,7 @@ void send_message(void)
     a safety precaution against crashes. */
 static bool clean_ir(int8_t* in)
 {
-    if(!player1 && *in != OVER_CODE) {
+    if(!player1 && *in != OVER_CODE && *in != BLANK) {
         *in = *in - ENCRYPTION_ADD;
     }
 
@@ -108,28 +108,26 @@ static bool clean_ir(int8_t* in)
 
 void read_message(void)
 {
-    // Checks for incoming message from opponent
+    // Checks for incoming message from opponent and makes sure this kit isn't writing
     if (ir_uart_read_ready_p() && ir_uart_write_finished_p()) {
         int8_t incoming = ir_uart_getc();
-        if(clean_ir(&incoming)) {
+        if(clean_ir(&incoming)) { // if cleaned message is valid
             if (incoming==OVER_CODE) { // Game over win
                 game_over(1); // 1 indictates win
             } else {
                 create_shell(incoming);
-
             }
-            sender = !sender;
+            sender = !sender; //once a valid message is recieved, switch between sender and reciever (not sender)
         }
     }
 }
 
+// sends or recieves a message depending on sender boolean
 void do_messages(void)
 {
     if(sender) {
-		led_set (LED1, 1);
         send_message();
     } else {
-		led_set (LED1, 0);
         read_message();
     }
 }

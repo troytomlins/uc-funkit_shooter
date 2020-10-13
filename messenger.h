@@ -9,16 +9,16 @@
 /* Define Message data */
 #define MAX_MESSAGE_QUEUE 10
 #define OVER_CODE 9 // arbitrary as long sa it isn't 0,1,2,3,4 or 13
-#define ENCRYPTION_ADD 50
-#define BLANK 37
+#define ENCRYPTION_ADD 50 //player 1 adds this to their ir messages, player 2 (not 1) subtracts this when recieving messages
+#define BLANK 37 //arbitrary value repeatedly sent when no messages need to be communicated
+
+bool get_sender(void);
 
 void init_messenger(bool is_player1);
 
 void add_message(int8_t message);
 
 void send_message(void);
-
-void reset_messenger(void);
 
 void do_messages(void);
 

@@ -45,6 +45,7 @@ void ready_up(void)
             //if player readies up and isnt already ready, change state to reflect that
             ready = true;
             if(!opponent_ready){
+				// if this kit readied first, it is set as player 1
 				init_messenger(true);
 			} else {
 				init_messenger(false);

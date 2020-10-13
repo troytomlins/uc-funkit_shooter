@@ -14,6 +14,7 @@
 #include "game.h"
 #include "readyup.h"
 #include "lives.h"
+#include "messenger.h"
 
 
 static bool ready;
@@ -61,34 +62,23 @@ void game_over(uint8_t state)
 
     if (state == 0) {
         tinygl_text (LOSE_TEXT);
-		ir_uart_putc(OVER_CODE); // Tells opponent that player is ready
+		ir_uart_putc(OVER_CODE); // Tells winner that game is over
+        if(!get_sender()) {
+            uint8_t i = 0;
+            while(i++ == SAFETY_WAIT_LOOPS) {
+                pacer_wait();
+            }
+        }
+        ir_uart_putc(OVER_CODE); // Tells winner that game is over
     } else if (state == 1) {
         tinygl_text (WIN_TEXT);
-        ir_uart_putc(CONFIRM_OVER); // Tells opponent that player is ready
-        restart = true;
     }
+
     while(!restart) {
         pacer_wait ();
         tinygl_update ();
-
-        if (ir_uart_read_ready_p()) {
-            // If recieved ir input and opponent is not ready, check if input is valid
-            // then update message state to reflect opponent status
-            uint8_t in;
-            in = ir_uart_getc ();
-
-            if(in == CONFIRM_OVER) {
-                // If input is 1, opponent has readied up
-                restart = true;
-            }
-        }
-    }
-    restart = false;
-    while(!restart){
-		pacer_wait ();
-        tinygl_update ();
         restart = play_again();
-	}
+    }
     tinygl_clear();
     tinygl_update();
 }
