@@ -34,6 +34,11 @@ bool get_sender(void){
 // inits the messenger as player 1 (or 2 if not player 1)
 void init_messenger(bool is_player1)
 {
+	uint8_t i;
+	for(i=0;i<MAX_MESSAGE_QUEUE;i++){
+		message_t* message = &message_pool[i];
+		message = NULL;
+	}
     head = NULL;
     tail = NULL;
     player1 = is_player1;

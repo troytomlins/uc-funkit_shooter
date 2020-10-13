@@ -17,4 +17,6 @@ void game_init(void);
 // inits only the game_objects
 void init_game_objects(void);
 
+
+void re_schedule(void);
 #endif

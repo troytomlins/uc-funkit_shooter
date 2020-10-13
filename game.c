@@ -43,7 +43,7 @@ void game_init(void)
     tinygl_init(DISPLAY_RATE); //includes display_init()
     ir_uart_init(); //includes timer0_init
     button_init();
-   
+
     init_game_objects();
 }
 
@@ -74,9 +74,33 @@ static void update_display(__unused__ void *data)
 /** Updates display to match game information */
 static void ir_task(__unused__ void *data)
 {
-	do_messages();
+    do_messages();
 }
 
+void re_schedule(void)
+{
+    task_t tasks[] = {
+        {
+            .func = process_input, .period = TASK_RATE / INPUT_RATE,
+            .data = 0
+        },
+        {
+            .func = ir_task, .period = TASK_RATE / IR_RATE,
+            .data = 0
+        },
+        {
+            .func = update_game, .period = TASK_RATE / GAME_TICK_RATE,
+            .data = 0
+        },
+        {
+            .func = update_display, .period = TASK_RATE / DISPLAY_RATE,
+            .data = 0
+        }
+    };
+
+    task_schedule (tasks, ARRAY_SIZE (tasks));
+
+}
 
 /** Main function of game */
 int main (void)
@@ -93,7 +117,7 @@ int main (void)
             .func = process_input, .period = TASK_RATE / INPUT_RATE,
             .data = 0
         },
-		{
+        {
             .func = ir_task, .period = TASK_RATE / IR_RATE,
             .data = 0
         },
