@@ -63,7 +63,6 @@ static bool play_again(void)
 void game_over(uint8_t state)
 {
     tinygl_clear();
-    init_game_objects(); // reset game objects
     tinygl_update(); // updates screen to be clear while the restart loads
     
     ready = false;
@@ -87,7 +86,7 @@ void game_over(uint8_t state)
     } else if (state == 1) {
 		// use buffer to store string, adds remaining lives to the end of the string
 		// before displaying.
-		char buffer[15];
+		char buffer[25];
         char *str = buffer;
 
         strcpy (str, WIN_TEXT);
@@ -111,5 +110,6 @@ void game_over(uint8_t state)
     // clear in prep for restart
     tinygl_clear();
     tinygl_update();
+    init_game_objects(); // reset game objects
     re_schedule();
 }
