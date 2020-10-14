@@ -1,5 +1,5 @@
 /** @file   game.c
-    @authors Troy Tomlins, William Chen
+    @authors Troy Tomlins, William Chen // # Ids: wch99, tpt38, 47994832, 53494295
     @date   8th Oct
     @brief  Core game module. Responsible for initialising the game, 
     declaring and starting the

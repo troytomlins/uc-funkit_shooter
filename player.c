@@ -1,5 +1,5 @@
 /** @file   player.c
-    @authors Troy Tomlins, William Chen
+    @authors Troy Tomlins, William Chen // # Ids: wch99, tpt38, 47994832, 53494295
     @date   7th Oct
     @brief  Player module, responsible for storing, changing, and displaying
     information on the player

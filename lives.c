@@ -1,5 +1,5 @@
 /** @file   lives.c
-    @authors Troy Tomlins, William Chen
+    @authors Troy Tomlins, William Chen // # Ids: wch99, tpt38, 47994832, 53494295
     @date   11th Oct
     @brief  Lives Module. Stores, manipulates, and displays lives
 */

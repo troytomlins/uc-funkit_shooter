@@ -1,5 +1,5 @@
 /** @file   messenger.c
-    @authors Troy Tomlins, William Chen
+    @authors Troy Tomlins, William Chen // # Ids: wch99, tpt38, 47994832, 53494295
     @date   13th Oct
     @brief  Messenger module source code, responsible for sending and recieveing
     through the IR. The messenger module has three key functionalities. Alternating sending and recieving,

@@ -1,5 +1,5 @@
 /** @file   readyup.c
-    @author William Chen, Troy Tomlins
+    @author William Chen, Troy Tomlins // IDS: wch99, tpt38, 47994832, 53494295
     @date   8th Oct
     @brief  Prompts and waits for players to ready up
 */

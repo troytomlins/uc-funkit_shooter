@@ -1,5 +1,5 @@
 /** @file   gameover.c
-    @authors Troy Tomlins, William Chen
+    @authors Troy Tomlins, William Chen // # Ids: wch99, tpt38, 47994832, 53494295
     @date   8th Oct
     @brief  ends game, displays score for winner, and prompts for a 
     restart

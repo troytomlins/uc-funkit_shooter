@@ -1,5 +1,5 @@
 /** @file   shoot.c
-    @author Troy Tomlins, William Chen
+    @author Troy Tomlins, William Chen // Ids: wch99, tpt38, 47994832, 53494295
     @date   7th Oct
     @brief  Shoot module, responsible for instantiating the shoot beam and
     player firing

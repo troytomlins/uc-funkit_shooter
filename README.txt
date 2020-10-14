@@ -1,3 +1,7 @@
+Shooter game
+Made by William Chen and Troy Tomlins
+IDS: wch99, tpt38, 47994832, 53494295
+
 Setting up:
  - When you start up the game, text will scroll prompting you to begin. Both player must be ready before the game begins
  - Sit opposite your opponent. Both player then set their funkits side by side so that each player's navsticks are on their right. 
