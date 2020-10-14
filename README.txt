@@ -8,6 +8,7 @@ Setting up:
  - Doing so should also align the ir emmiters and recievers. 
  - To ready up, each player should press on the non-resetting button
  - The first person to ready up becomes player 1
+ - Ensure funkits stay within recieving range
 
 Moving the player:
  - Your player is at the bottom of the screen. Use the navstick to move it left and right.
