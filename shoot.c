@@ -41,7 +41,7 @@ void draw_shoot_beam(void)
     Required because players are opposite one another and their funkits are mirrored */
 static int8_t mirror_shot(int8_t shot)
 {
-     return(4-shot);
+    return(4-shot);
 }
 
 /** Instantiates a shot */
@@ -49,7 +49,7 @@ void start_shot(int8_t shot)
 {
     if (shot_ready) {
         shot_col = shot; // Sets shot column
-		add_message(mirror_shot(shot_col)); // Sends to other player using messenger module
+        add_message(mirror_shot(shot_col)); // Sends to other player using messenger module
         shot_on = true;
         shot_ready = false;
         shot_dis = VISUAL_COOLDOWN; // Sets visual cooldown
@@ -60,9 +60,9 @@ void start_shot(int8_t shot)
 /** Updates the shoot_beam information */
 void update_shoot_beam(void)
 {
-	// decrements shot_dis and shot_cd and checks if they've hit 0
-	// then turns the shot beam off or reloads.
-    
+    // decrements shot_dis and shot_cd and checks if they've hit 0
+    // then turns the shot beam off or reloads.
+
     if (shot_dis-- == 0) {
         shot_on = false;
     }

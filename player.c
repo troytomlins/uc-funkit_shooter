@@ -29,7 +29,7 @@ static void move_player(int8_t inc)
     tinygl_draw_point(player.pos, 0);
 
     // note that an extra 5 is added to pos.x to ensure it is positive
-    // after modulo-ing it. This also allows the player to jump from the 
+    // after modulo-ing it. This also allows the player to jump from the
     // far left to the far right by "moving off" the ledmat
     player.pos.x = (player.pos.x + 5+ inc) % 5;
 }

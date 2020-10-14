@@ -13,7 +13,7 @@
 // x coord codes are 0, 1, 2, 3, and 4
 #define OVER_CODE 9
 #define READY_CODE 13
-#define BLANK 37 
+#define BLANK 37
 
 #define ENCRYPTION_ADD 50 // value to "encrypt" an output column
 

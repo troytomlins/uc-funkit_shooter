@@ -1,7 +1,7 @@
 /** @file   gameover.c
     @authors Troy Tomlins, William Chen // # Ids: wch99, tpt38, 47994832, 53494295
     @date   8th Oct
-    @brief  ends game, displays score for winner, and prompts for a 
+    @brief  ends game, displays score for winner, and prompts for a
     restart
 */
 #include <string.h>
@@ -56,7 +56,7 @@ static bool play_again(void)
 }
 
 /** Game over.
- * Displays if you won or lost, and a score if you won. 
+ * Displays if you won or lost, and a score if you won.
  * Then asks if you want to play again.
  * If players play again, clears tinygl and resets the task scheduler.
  */
@@ -64,7 +64,7 @@ void game_over(uint8_t state)
 {
     tinygl_clear();
     tinygl_update(); // updates screen to be clear while the restart loads
-    
+
     ready = false;
     opponent_ready = false;
     bool restart = false;
@@ -84,9 +84,9 @@ void game_over(uint8_t state)
         }
         ir_uart_putc(OVER_CODE); // Tells winner that game is over
     } else if (state == 1) {
-		// use buffer to store string, adds remaining lives to the end of the string
-		// before displaying.
-		char buffer[25];
+        // use buffer to store string, adds remaining lives to the end of the string
+        // before displaying.
+        char buffer[25];
         char *str = buffer;
 
         strcpy (str, WIN_TEXT);

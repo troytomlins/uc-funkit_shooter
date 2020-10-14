@@ -44,12 +44,12 @@ void ready_up(void)
             tinygl_clear();
             //if player readies up and isnt already ready, change state to reflect that
             ready = true;
-            if(!opponent_ready){
-				// if this kit readied first, it is set as player 1
-				init_messenger(true);
-			} else {
-				init_messenger(false);
-			}
+            if(!opponent_ready) {
+                // if this kit readied first, it is set as player 1
+                init_messenger(true);
+            } else {
+                init_messenger(false);
+            }
             tinygl_text(READY_TEXT);
             ir_uart_putc(READY_CODE); // Tells opponent that player is ready
         }

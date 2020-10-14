@@ -21,7 +21,7 @@ void show_lives(void)
         led_set (LED1, 1);
     }
     if (lives==2) { // LED Flashes
-		
+
         // after FLASH_TICKS amount of game ticks, toggle led
         if(flash_ticks++ == FLASH_TICKS) {
             flash_ticks = 0;
@@ -49,7 +49,7 @@ void check_hit(int8_t shell_pos)
 {
     tinygl_point_t player_pos = get_player_pos();
     if (player_pos.x == shell_pos) {
-		lives--;
+        lives--;
         if (lives == 0) { // reduce lives FIRST, then check if player is out of lives
             game_over(0); // input 0 indictates loss
         }
